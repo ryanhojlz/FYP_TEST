@@ -31,18 +31,6 @@ public class Scientist : Minion
         }
     }
 
-    public override void TakeDamage(float dmgAmount)
-    {
-        healthValue -= dmgAmount;
-        healthBar.fillAmount = healthValue / startHealthvalue;
-
-        //Have to multiply by defence value to reduce the damage taken
-        if (healthValue <= 0)
-        {
-            SetIsAlive(false);
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {

@@ -85,9 +85,16 @@ public class Minion : MonoBehaviour
         isAlive = toggle;
     }
 
-    public virtual void TakeDamage(float dmgAmount)
+    public void TakeDamage(float dmgAmount)
     {
+        healthValue -= dmgAmount;
+        healthBar.fillAmount = healthValue / startHealthvalue;
 
+        //Have to multiply by defence value to reduce the damage taken
+        if (healthValue <= 0)
+        {
+            SetIsAlive(false);
+        }
     }
 
     public virtual void Attack()
