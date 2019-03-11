@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - WaypointManager
+  - Ally_Waypoint
+  - Enemy_Waypoint
+  - Enemy_WaypointManager
+  - Ally_Unit
+  - Enemy_Unit
+  - PathManager
+  - Ally_Path
+  - Enemy_Path
   layers:
   - Default
   - TransparentFX
@@ -14,7 +23,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - TestUnit
   - 
   - 
   - 
