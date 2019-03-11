@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tank : Minion
 {
+    GameObject target;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,10 +16,14 @@ public class Tank : Minion
 
     public override void Attack()
     {
-        GameObject target = FindNearestUnit(transform.position);
+        target = FindNearestUnit(transform.position);
         //base.Attack();
+        if (target == null)
+            return;
+
+        if(target)
         target.GetComponent<Minion>().TakeDamage(attackValue);
-        MeleeAttack();
+        //MeleeAttack();
     }
 
     public override void Defend()
@@ -27,8 +32,8 @@ public class Tank : Minion
     }
 
     // Update is called once per frame
-    void Update()
+    void  Update()
     {
-        
+        Attack();
     }
 }

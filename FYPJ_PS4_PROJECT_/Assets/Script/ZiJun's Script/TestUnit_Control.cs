@@ -50,11 +50,12 @@ public class TestUnit_Control : MonoBehaviour
             //var accessingVar = tempWaypointmanager.GetComponent<WaypointManager>();
 
             //agent.SetDestination(accessingVar.GetNearestWaypoint(transform.position));
-            pathIndex = tempPathManager.GetComponent<PathManager>().AssignPath(transform.position);
+
+            pathIndex = tempPathManager.GetComponent<PathManager>().AssignPath(transform.position, this.tag);
 
             agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
         }
-
+        //tempPathManager.GetComponent<PathManager>().TestValue(pathIndex, waypointIndex, transform.position);
         if (agent.remainingDistance > agent.stoppingDistance)
         {
             //After reaching, Increment to next waypoint
@@ -63,14 +64,34 @@ public class TestUnit_Control : MonoBehaviour
         }
         else
         {
-            if (tempPathManager.GetComponent<PathManager>().ReachDestination(pathIndex, waypointIndex, agent.stoppingDistance, transform.position) //Check if the unit have reached the waypoint
-                && waypointIndex < tempPathManager.GetComponent<PathManager>().GetPathWaypointCount(pathIndex) // Check if it is the final point
-                )
-            {
-                ++waypointIndex;
-            }
+
+
+            //if (tempPathManager.GetComponent<PathManager>().ReachDestination(pathIndex, waypointIndex, agent.stoppingDistance, transform.position) //Check if the unit have reached the waypoint
+            //    && waypointIndex < tempPathManager.GetComponent<PathManager>().GetPathWaypointCount(pathIndex) // Check if it is the final point
+            //    )
+            //{
+        
+            //}
+
             character.Move(Vector3.zero, false, false);
         }
+
+        if (waypointIndex < tempPathManager.GetComponent<PathManager>().GetPathWaypointCount(pathIndex))
+        {
+            //If waypoint has reached, goes to the next path
+            if (!agent.pathPending)
+            {
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                    {
+                        // Done
+                        ++waypointIndex;
+                    }
+                }
+            }
+        }
+       
     }
 
     //void UpdateWaypointList()

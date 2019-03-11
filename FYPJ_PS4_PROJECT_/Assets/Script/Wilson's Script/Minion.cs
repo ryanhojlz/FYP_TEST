@@ -88,7 +88,7 @@ public class Minion : MonoBehaviour
     public void TakeDamage(float dmgAmount)
     {
         healthValue -= dmgAmount;
-        healthBar.fillAmount = healthValue / startHealthvalue;
+        //healthBar.fillAmount = healthValue / startHealthvalue;
 
         //Have to multiply by defence value to reduce the damage taken
         if (healthValue <= 0)
@@ -120,62 +120,74 @@ public class Minion : MonoBehaviour
     public GameObject FindNearestUnit(Vector3 unit_position)
     {
         float nearest = float.MaxValue;
-        GameObject targetGameObject = new GameObject();
+        GameObject targetGameObject = null;
 
         Ray CastToGround = new Ray(unit_position, Vector3.down);
         RaycastHit hit;
+        RaycastHit Target_hit;
         Vector3 PlayerPos;
-        //nearestpoint = unit_position;//Initing the pos for nearest point to be it's own point
+        Physics.Raycast(CastToGround, out hit);//Ray casting the player position
 
-        if (this.tag == "Ally_Unit")
+        if (Physics.Raycast(CastToGround, out hit))
         {
-            if (Physics.Raycast(CastToGround, out hit))
-            {
-                //Playerpos is raycasted to floor value
-                PlayerPos = hit.point;
-                targetList = GameObject.FindGameObjectsWithTag("Enemy_Unit");
+            PlayerPos = hit.point;
+            
 
-                foreach (GameObject TargetObject in targetList)
+            if (this.tag == "Ally_Unit")//Checking for Ally faction
+            {
+                targetList = GameObject.FindGameObjectsWithTag("Enemy_Unit");
+                
+                foreach (GameObject GO in targetList)
                 {
-                    Vector3 waypointPos = TargetObject.GetComponent<WaypointClass>().GetRayCast();
+                    //Debug.Log(tag);
+
+                    CastToGround = new Ray(GO.transform.position, Vector3.down);
+                    Physics.Raycast(CastToGround, out Target_hit);
+                    Vector3 waypointPos = Target_hit.point;
+
                     float dist = (PlayerPos - waypointPos).magnitude;
 
                     if (dist < nearest)
                     {
                         nearest = dist;
-                        targetGameObject = TargetObject;
+                        targetGameObject = GO;
+                        //Debug.Log("Ally found");
                     }
                 }
+
             }
-        }
-        else if (this.tag == "Enemy_Unit")
-        {
-            if (Physics.Raycast(CastToGround, out hit))
+            else
             {
-                //Playerpos is raycasted to floor value
-                PlayerPos = hit.point;
                 targetList = GameObject.FindGameObjectsWithTag("Ally_Unit");
 
-                foreach (GameObject TargetObject in targetList)
+                foreach (GameObject GO in targetList)
                 {
-                    Vector3 waypointPos = TargetObject.GetComponent<WaypointClass>().GetRayCast();
+                    //Debug.Log(tag);
+
+                    CastToGround = new Ray(GO.transform.position, Vector3.down);
+                    Physics.Raycast(CastToGround, out Target_hit);
+                    Vector3 waypointPos = Target_hit.point;
+
                     float dist = (PlayerPos - waypointPos).magnitude;
 
                     if (dist < nearest)
                     {
                         nearest = dist;
-                        targetGameObject = TargetObject;
+                        targetGameObject = GO;
+                        //Debug.Log("Enemy found");
                     }
                 }
             }
         }
 
+        //Debug.Log(targetGameObject.name);
         return targetGameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //Attack();
+        Debug.Log("Testing update message");
     }
 }
