@@ -12,6 +12,7 @@ public class Tank : Minion
         attackValue = 30;
         speedValue = 5;
         isAlive = true;
+        startHealthvalue = healthValue;
     }
 
     public override void Attack()
@@ -32,8 +33,8 @@ public class Tank : Minion
     }
 
     // Update is called once per frame
-    void  Update()
-    {
-        Attack();
-    }
+    //void  Update()
+    //{
+        //Attack();
+    //}
 }

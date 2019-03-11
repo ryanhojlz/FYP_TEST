@@ -88,13 +88,19 @@ public class Minion : MonoBehaviour
     public void TakeDamage(float dmgAmount)
     {
         healthValue -= dmgAmount;
-        //healthBar.fillAmount = healthValue / startHealthvalue;
+        
 
         //Have to multiply by defence value to reduce the damage taken
         if (healthValue <= 0)
         {
             SetIsAlive(false);
         }
+    }
+
+    void UpdateHealth()
+    {
+        healthBar.fillAmount = healthValue / startHealthvalue;
+        Debug.Log("Update Health : " + healthValue + " / " + startHealthvalue);
     }
 
     public virtual void Attack()
@@ -188,6 +194,13 @@ public class Minion : MonoBehaviour
     void Update()
     {
         //Attack();
-        Debug.Log("Testing update message");
+        Debug.Log("Update Health : " + healthValue + " / " + startHealthvalue);
+        UpdateHealth();
+
+        if (healthValue <= 0)
+        {
+            //Debug.Log("He dead boy");
+            Destroy(this.gameObject);
+        }
     }
 }

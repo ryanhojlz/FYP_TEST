@@ -536,7 +536,8 @@ MonoBehaviour:
   rangeValue: 0
   isAlive: 1
   targetList: []
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 1489932635851533408, guid: e7d12551997c73b48b91782548c8934b,
+    type: 3}
 --- !u!54 &7775906021464897774
 Rigidbody:
   m_ObjectHideFlags: 0
