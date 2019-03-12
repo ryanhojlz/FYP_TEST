@@ -33,48 +33,11 @@ public class TestUnit_Control : MonoBehaviour
         }
         else
         {
-
-            //GameObject tempWaypointmanager;// = GameObject.FindGameObjectWithTag("WaypointManager");
-
-            //if (this.tag == "Enemy_Unit")
-            //{
-            //    tempWaypointmanager = GameObject.FindGameObjectWithTag("Enemy_WaypointManager");
-            //    //Debug.Log("Assigning Enemy Waypoint");
-            //}
-            //else
-            //{
-            //    tempWaypointmanager = GameObject.FindGameObjectWithTag("WaypointManager");
-            //    //Debug.Log("Assigning Ally Waypoint");
-            //}
-
-            //var accessingVar = tempWaypointmanager.GetComponent<WaypointManager>();
-
-            //agent.SetDestination(accessingVar.GetNearestWaypoint(transform.position));
-
             pathIndex = tempPathManager.GetComponent<PathManager>().AssignPath(transform.position, this.tag);
-
             agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
         }
-        //tempPathManager.GetComponent<PathManager>().TestValue(pathIndex, waypointIndex, transform.position);
-        if (agent.remainingDistance > agent.stoppingDistance)
-        {
-            //After reaching, Increment to next waypoint
-            //++waypointIndex;
-            character.Move(agent.desiredVelocity, false, false);
-        }
-        else
-        {
 
-
-            //if (tempPathManager.GetComponent<PathManager>().ReachDestination(pathIndex, waypointIndex, agent.stoppingDistance, transform.position) //Check if the unit have reached the waypoint
-            //    && waypointIndex < tempPathManager.GetComponent<PathManager>().GetPathWaypointCount(pathIndex) // Check if it is the final point
-            //    )
-            //{
-        
-            //}
-
-            character.Move(Vector3.zero, false, false);
-        }
+        Debug.Log("Index : " + waypointIndex);
 
         if (waypointIndex < tempPathManager.GetComponent<PathManager>().GetPathWaypointCount(pathIndex))
         {
@@ -87,11 +50,21 @@ public class TestUnit_Control : MonoBehaviour
                     {
                         // Done
                         ++waypointIndex;
+                        agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
                     }
                 }
             }
         }
-       
+
+        //tempPathManager.GetComponent<PathManager>().TestValue(pathIndex, waypointIndex, transform.position);
+        if (agent.remainingDistance > agent.stoppingDistance)
+        {
+            character.Move(agent.desiredVelocity, false, false);
+        }
+        else
+        {
+            character.Move(Vector3.zero, false, false);
+        }
     }
 
     //void UpdateWaypointList()

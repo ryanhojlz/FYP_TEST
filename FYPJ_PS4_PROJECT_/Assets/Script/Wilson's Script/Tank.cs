@@ -8,11 +8,12 @@ public class Tank : Minion
     // Start is called before the first frame update
     void Start()
     {
-        healthValue = 100;
-        attackValue = 30;
-        speedValue = 5;
+        //healthValue = 100;
+        //attackValue = 30;
+        //speedValue = 5;
         isAlive = true;
         startHealthvalue = healthValue;
+        
     }
 
     public override void Attack()
