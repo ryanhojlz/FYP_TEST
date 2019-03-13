@@ -18,13 +18,13 @@ public class Tank : Minion
         if (attackSpeedValue > 0)
         {
             CountDownTimer = 1 / attackSpeedValue;
-            Debug.Log("CountDownTimer : " + CountDownTimer);
+            //Debug.Log("CountDownTimer : " + CountDownTimer);
         }
         else
         {
             //If is less then 0, it should never attack
             CountDownTimer = float.MaxValue;
-            Debug.Log("CountDownTimer : " + CountDownTimer);
+            //Debug.Log("CountDownTimer : " + CountDownTimer);
         }
 
         OriginalTimer = CountDownTimer;
@@ -36,6 +36,8 @@ public class Tank : Minion
         //base.Attack();
         if (target == null)
             return;
+
+        Debug.Log("Who is attacking? : " + this.name);
 
         if(target)
         target.GetComponent<Minion>().TakeDamage(attackValue);

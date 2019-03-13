@@ -115,7 +115,7 @@ public class Minion : MonoBehaviour
     void UpdateHealth()
     {
         healthBar.fillAmount = healthValue / startHealthvalue;
-        Debug.Log("Update Health : " + healthValue + " / " + startHealthvalue);
+        //Debug.Log("Update Health : " + healthValue + " / " + startHealthvalue);
     }
 
     public virtual void Attack()
@@ -204,20 +204,20 @@ public class Minion : MonoBehaviour
     void Update()
     {
         //Attack();
-        Debug.Log("Update Health : " + healthValue + " / " + startHealthvalue);
+        //Debug.Log("Update Health : " + healthValue + " / " + startHealthvalue);
         
         if (CountDownTimer <= 0)
         {
             Attack();
             CountDownTimer = OriginalTimer;
-            Debug.Log("Original : " + OriginalTimer);
+            //Debug.Log("Original : " + OriginalTimer);
         }
         else
         {
             CountDownTimer -= Time.deltaTime;
         }
 
-        Debug.Log("Countdown : " + CountDownTimer);
+        //Debug.Log("Countdown : " + CountDownTimer);
 
         UpdateHealth();
 

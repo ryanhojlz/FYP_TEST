@@ -23,7 +23,7 @@ public class PathClass : MonoBehaviour
         if (waypointList.Count < 0)
             return null;
 
-        Debug.Log("ListCount : " + waypointList.Count);
+        //Debug.Log("ListCount : " + waypointList.Count);
         if (index < waypointList.Count)
         return waypointList[index];
 
