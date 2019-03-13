@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64b7798bbc382b45a4ab6004c9f9897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitToSpawn: {fileID: 4080119947084251927, guid: a52d908ea40f01e44b2ebed945013529,
+  UnitToSpawn: {fileID: 7750817691118526209, guid: c6b68c3cd5400ef46bdc3f79a5cb34b1,
     type: 3}
 --- !u!54 &3816241128689435900
 Rigidbody:

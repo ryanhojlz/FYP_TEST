@@ -26,8 +26,6 @@ public class SpawnUnit : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-
-        
     }
 
     void SpawningUnit()
