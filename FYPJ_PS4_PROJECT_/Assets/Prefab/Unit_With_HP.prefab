@@ -874,7 +874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthValue: 20
-  attackValue: 1
+  attackValue: 5
   defenceValue: 1
   attackSpeedValue: 1
   rangeValue: 1

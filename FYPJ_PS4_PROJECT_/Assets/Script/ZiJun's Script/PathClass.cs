@@ -20,6 +20,10 @@ public class PathClass : MonoBehaviour
 
     public WaypointClass GetWayPoint(int index)
     {
+        if (waypointList.Count < 0)
+            return null;
+
+        Debug.Log("ListCount : " + waypointList.Count);
         if (index < waypointList.Count)
         return waypointList[index];
 
