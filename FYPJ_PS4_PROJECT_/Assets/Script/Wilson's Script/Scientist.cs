@@ -16,11 +16,6 @@ public class Scientist : Minion
         isAlive = true;
     }
 
-    public override void Defend()
-    {
-        //base.Defend();
-    }
-
     public void Heal(float HealValue)
     {
         if (healthValue < startHealthvalue)

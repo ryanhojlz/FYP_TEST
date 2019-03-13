@@ -123,11 +123,6 @@ public class Minion : MonoBehaviour
 
     }
 
-    public virtual void Defend()
-    {
-
-    }
-
     public void MeleeAttack()
     {
 

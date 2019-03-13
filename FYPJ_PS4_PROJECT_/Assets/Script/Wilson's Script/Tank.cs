@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Tank : Minion
 {
+    private StateMachine stateMachine = new StateMachine();
+
     GameObject target;
     // Start is called before the first frame update
     void Start()
     {
+        //this.stateMachine.ChangeState(new MovingState());//state machine
+
         isAlive = true;
         startHealthvalue = healthValue;
 
@@ -38,9 +42,9 @@ public class Tank : Minion
         //MeleeAttack();
     }
 
-    public override void Defend()
+    public void Defend(float _defendValue)
     {
-        //base.Defend();
+        
     }
 
     // Update is called once per frame

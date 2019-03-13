@@ -28,11 +28,6 @@ public class Sniper : Minion
         }
     }
 
-    public override void Defend()
-    {
-        //base.Defend();
-    }
-
     // Update is called once per frame
     void Update()
     {
