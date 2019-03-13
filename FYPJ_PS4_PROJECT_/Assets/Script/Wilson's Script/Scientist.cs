@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Scientist : Minion
 {
+    public GameObject[] healTargetList;
     // Start is called before the first frame update
     void Start()
     {
-        isAlive = true;
-    }
 
-    public override void Defend()
-    {
-        //base.Defend();
+        healthValue = 100;
+        startHealthvalue = healthValue;
+        attackValue = 30;
+
+        isAlive = true;
     }
 
     public void Heal(float HealValue)
@@ -28,6 +29,20 @@ public class Scientist : Minion
         }
     }
 
+    public void FindAllyToHeal()
+    {
+        //base.FindAllyToHeal();
+        healTargetList = GameObject.FindGameObjectsWithTag("Ally_Unit");
+
+        foreach (GameObject GO in healTargetList)
+        {
+            //how to search through the list and find the unit with the lowest hp?
+            if (healthValue < 30)//only find units with health value less than 20?
+            {
+                Heal(60f);
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {
