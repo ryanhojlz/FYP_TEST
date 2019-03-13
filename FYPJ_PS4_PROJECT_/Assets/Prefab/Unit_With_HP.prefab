@@ -876,7 +876,7 @@ MonoBehaviour:
   healthValue: 20
   attackValue: 1
   defenceValue: 1
-  speedValue: 1
+  attackSpeedValue: 1
   rangeValue: 1
   isAlive: 1
   targetList: []

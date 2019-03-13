@@ -12,17 +12,32 @@ public class Minion : MonoBehaviour
     public float healthValue;
     public float attackValue;
     public float defenceValue;
-    public float speedValue;
+    public float attackSpeedValue;
     public float rangeValue;
     public bool isAlive;
     public GameObject[] targetList; //enemy or ally also can
     public Image healthBar;
+
+    protected float CountDownTimer;
+    protected float OriginalTimer;
 
     // Start is called before the first frame update
     void Start()
     {
         isAlive = true;
         startHealthvalue = healthValue;
+        if (attackSpeedValue > 0)
+        {
+            CountDownTimer = 1 / attackSpeedValue;
+            Debug.Log("CountDownTimer : " + CountDownTimer);
+        }
+        else
+        {
+            //If is less then 0, it should never attack
+            CountDownTimer = float.MaxValue;
+        }
+
+        OriginalTimer = CountDownTimer;
     }
 
     public float GetHealth()
@@ -45,14 +60,14 @@ public class Minion : MonoBehaviour
         attackValue = _attack;
     }
 
-    public float GetSpeed()
+    public float GetAttackSpeed()
     {
-        return speedValue;
+        return attackSpeedValue;
     }
 
-    public void SetSpeed(float _speed)
+    public void SetAttackSpeed(float _speed)
     {
-        speedValue = _speed;
+        attackSpeedValue = _speed;
     }
 
     public float GetRange()
@@ -195,6 +210,20 @@ public class Minion : MonoBehaviour
     {
         //Attack();
         Debug.Log("Update Health : " + healthValue + " / " + startHealthvalue);
+        
+        if (CountDownTimer <= 0)
+        {
+            Attack();
+            CountDownTimer = OriginalTimer;
+            Debug.Log("Original : " + OriginalTimer);
+        }
+        else
+        {
+            CountDownTimer -= Time.deltaTime;
+        }
+
+        Debug.Log("Countdown : " + CountDownTimer);
+
         UpdateHealth();
 
         if (healthValue <= 0)

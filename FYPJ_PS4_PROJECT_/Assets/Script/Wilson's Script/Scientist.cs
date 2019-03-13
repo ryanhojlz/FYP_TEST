@@ -8,10 +8,11 @@ public class Scientist : Minion
     // Start is called before the first frame update
     void Start()
     {
+
         healthValue = 100;
         startHealthvalue = healthValue;
         attackValue = 30;
-        speedValue = 5;
+
         isAlive = true;
     }
 
@@ -33,7 +34,7 @@ public class Scientist : Minion
         }
     }
 
-    public override void FindAllyToHeal()
+    public void FindAllyToHeal()
     {
         //base.FindAllyToHeal();
         healTargetList = GameObject.FindGameObjectsWithTag("Ally_Unit");

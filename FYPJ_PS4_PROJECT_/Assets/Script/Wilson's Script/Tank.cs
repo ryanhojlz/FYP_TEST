@@ -8,12 +8,22 @@ public class Tank : Minion
     // Start is called before the first frame update
     void Start()
     {
-        //healthValue = 100;
-        //attackValue = 30;
-        //speedValue = 5;
         isAlive = true;
         startHealthvalue = healthValue;
-        
+
+        if (attackSpeedValue > 0)
+        {
+            CountDownTimer = 1 / attackSpeedValue;
+            Debug.Log("CountDownTimer : " + CountDownTimer);
+        }
+        else
+        {
+            //If is less then 0, it should never attack
+            CountDownTimer = float.MaxValue;
+            Debug.Log("CountDownTimer : " + CountDownTimer);
+        }
+
+        OriginalTimer = CountDownTimer;
     }
 
     public override void Attack()

@@ -1168,7 +1168,7 @@ GameObject:
   - component: {fileID: 1853487196421818280}
   - component: {fileID: 1853487196421818281}
   m_Layer: 9
-  m_Name: Upsize_Enemy
+  m_Name: EnemyUnit_With_Hp_Enemy
   m_TagString: Enemy_Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1216,10 +1216,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d44d6cdf6cf84b9449b8ca0143c00c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthValue: 10
+  healthValue: 1000
   attackValue: 0
   defenceValue: 0
-  speedValue: 0
+  attackSpeedValue: 0
   rangeValue: 0
   isAlive: 1
   targetList: []
