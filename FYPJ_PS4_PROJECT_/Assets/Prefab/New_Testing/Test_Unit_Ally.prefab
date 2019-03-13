@@ -293,7 +293,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5000001
-  m_Speed: 10
+  m_Speed: 0
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -321,7 +321,10 @@ MonoBehaviour:
   attackValue: 1
   defenceValue: 10
   attackSpeedValue: 1
+  moveSpeedValue: 10
   rangeValue: 3
   isAlive: 0
   targetList: []
   healthBar: {fileID: 7750817690676117659}
+  meleeProjectile: {fileID: 2243666706149067221, guid: 20f42f92e7c7bce4187ebb7cea1bd547,
+    type: 3}

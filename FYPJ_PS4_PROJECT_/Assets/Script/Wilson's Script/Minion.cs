@@ -23,6 +23,8 @@ public class Minion : MonoBehaviour
     protected float CountDownTimer;
     protected float OriginalTimer;
 
+    protected StateMachine stateMachine = new StateMachine();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -205,7 +207,10 @@ public class Minion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+
+        stateMachine.ExecuteStateUpdate();
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject _meleeProjectile = Instantiate(meleeProjectile, this.transform);
         }

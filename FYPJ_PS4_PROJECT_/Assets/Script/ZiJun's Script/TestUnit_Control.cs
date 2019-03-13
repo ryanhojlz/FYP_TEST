@@ -31,6 +31,7 @@ public class TestUnit_Control : MonoBehaviour
         {
             return;
         }
+
         agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
 
         if (waypointIndex < tempPathManager.GetComponent<PathManager>().GetPathWaypointCount(pathIndex))
@@ -50,18 +51,18 @@ public class TestUnit_Control : MonoBehaviour
             }
         }
 
-        
 
-        //if (character != null)
-        //{
-        //    if (agent.remainingDistance > agent.stoppingDistance)
-        //    {
-        //        character.Move(agent.desiredVelocity, false, false);
-        //    }
-        //    else
-        //    {
-        //        character.Move(Vector3.zero, false, false);
-        //    }
-        //}
+
+        if (character != null)
+        {
+            if (agent.remainingDistance > agent.stoppingDistance)
+            {
+                character.Move(agent.desiredVelocity, false, false);
+            }
+            else
+            {
+                character.Move(Vector3.zero, false, false);
+            }
+        }
     }
 }

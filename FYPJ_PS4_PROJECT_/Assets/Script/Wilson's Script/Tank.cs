@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class Tank : Minion
 {
-    private StateMachine stateMachine = new StateMachine();
-
+    //private StateMachine stateMachine = new StateMachine();
+    
     GameObject target;
     // Start is called before the first frame update
     void Start()
