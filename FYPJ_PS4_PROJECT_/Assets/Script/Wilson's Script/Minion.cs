@@ -227,4 +227,10 @@ public class Minion : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, rangeValue);
+    }
 }
