@@ -12,32 +12,23 @@ public class TestUnit_Control : MonoBehaviour
     private int pathIndex = 0;
     private int waypointIndex = 0;
 
+    //private StateMachine sm = new StateMachine();
+
     private GameObject tempPathManager;
     private void Start()
     {
+        //this.sm.ChangeState(new State_Moving(agent, pathIndex));
         agent.updateRotation = false;
         tempPathManager = GameObject.FindGameObjectWithTag("PathManager");
     }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        //this.sm.ExecuteStateUpdate();
+        //Debug.Log(pathIndex);
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                agent.SetDestination(hit.point);
-            }
-        }
-        else
-        {
-            pathIndex = tempPathManager.GetComponent<PathManager>().AssignPath(transform.position, this.tag);
-            agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
-        }
-
-        Debug.Log("Index : " + waypointIndex);
+        pathIndex = tempPathManager.GetComponent<PathManager>().AssignPath(transform.position, this.tag);
+        agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
 
         if (waypointIndex < tempPathManager.GetComponent<PathManager>().GetPathWaypointCount(pathIndex))
         {
@@ -56,7 +47,6 @@ public class TestUnit_Control : MonoBehaviour
             }
         }
 
-        //tempPathManager.GetComponent<PathManager>().TestValue(pathIndex, waypointIndex, transform.position);
         if (agent.remainingDistance > agent.stoppingDistance)
         {
             character.Move(agent.desiredVelocity, false, false);
@@ -66,23 +56,4 @@ public class TestUnit_Control : MonoBehaviour
             character.Move(Vector3.zero, false, false);
         }
     }
-
-    //void UpdateWaypointList()
-    //{
-    //    //Getting the variables
-    //    var tempWaypointmanager = GameObject.FindGameObjectWithTag("WaypointManager");
-    //    var accessingVar = tempWaypointmanager.GetComponent<WaypointManager>();
-
-    //    var tempWaypointList = accessingVar.GetWaypointList();
-
-    //    PlayerWaypointList.RemoveRange(0 , PlayerWaypointList.Count);
-
-    //    for (int i = 0; i < tempWaypointList.Count; ++i)
-    //    {
-    //        WaypointClass AddtoList = new WaypointClass();
-    //        AddtoList.SetPos(tempWaypointList[i].GetPos());
-    //        AddtoList.SetRayCast(tempWaypointList[i].GetRayCast());
-    //        PlayerWaypointList.Add(AddtoList);
-    //    }
-    //}
 }

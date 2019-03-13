@@ -7,9 +7,6 @@ public class Scientist : Minion
     // Start is called before the first frame update
     void Start()
     {
-        startHealthvalue = 100;
-        attackValue = 30;
-        speedValue = 5;
         isAlive = true;
     }
 
