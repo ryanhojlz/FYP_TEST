@@ -13,10 +13,12 @@ public class Minion : MonoBehaviour
     public float attackValue;
     public float defenceValue;
     public float attackSpeedValue;
+    public float moveSpeedValue;
     public float rangeValue;
     public bool isAlive;
     public GameObject[] targetList; //enemy or ally also can
     public Image healthBar;
+    public GameObject meleeProjectile;
 
     protected float CountDownTimer;
     protected float OriginalTimer;
@@ -203,6 +205,10 @@ public class Minion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            GameObject _meleeProjectile = Instantiate(meleeProjectile, this.transform);
+        }
         //Attack();
         Debug.Log("Update Health : " + healthValue + " / " + startHealthvalue);
         

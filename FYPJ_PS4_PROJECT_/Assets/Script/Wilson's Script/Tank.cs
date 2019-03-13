@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Tank : Minion
 {
-    //private StateMachine stateMachine = new StateMachine();
+    private StateMachine stateMachine = new StateMachine();
 
     GameObject target;
     // Start is called before the first frame update
     void Start()
     {
-        //this.stateMachine.ChangeState(new MovingState());//state machine
+        this.stateMachine.ChangeState(new MovingState(this.GetComponent<NavMeshAgent>(), moveSpeedValue));//state machine
 
         isAlive = true;
         startHealthvalue = healthValue;
