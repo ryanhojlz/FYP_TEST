@@ -46,7 +46,7 @@ public class AttackState : IState
 
     public void Exit()
     {
-        
+
     }
 
 }

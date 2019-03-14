@@ -2,35 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sniper : Attack_Unit
+public class Sniper : Minion
 {
-    //Gun gun = new Gun(); //Sniper has a gun
-    //GameObject target;
-
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-    //    isAlive = true
-    //}
-
-    //public override void Attack()
-    //{
-    //    //base.Attack();
-    //    target = FindNearestUnit(transform.position);
-    //    //base.Attack();
-    //    if (target == null)
-    //        return;
-
-    //    if (target)
-    //    {
-    //        target.GetComponent<Minion>().TakeDamage(attackValue);
-    //        gun.Shoot();
-    //    }
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
+   
 }
