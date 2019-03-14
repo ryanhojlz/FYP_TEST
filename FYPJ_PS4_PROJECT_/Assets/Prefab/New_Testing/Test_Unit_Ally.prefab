@@ -332,6 +332,10 @@ MonoBehaviour:
     type: 3}
   minionWithinRange: []
   TriggerRange: {fileID: 7393058015087559285}
+  Enemy_Tag: 
+  Ally_Tag: 
+  bulletPrefab: {fileID: 2243666706149067221, guid: 20f42f92e7c7bce4187ebb7cea1bd547,
+    type: 3}
 --- !u!135 &7393058015087559285
 SphereCollider:
   m_ObjectHideFlags: 0
