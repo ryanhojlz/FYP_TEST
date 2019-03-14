@@ -249,8 +249,8 @@ MonoBehaviour:
   attackValue: 1
   defenceValue: 10
   attackSpeedValue: 1
-  moveSpeedValue: 10
-  rangeValue: 3
+  moveSpeedValue: 5
+  rangeValue: 10
   isAlive: 0
   targetList: []
   healthBar: {fileID: 1400482511}
@@ -258,6 +258,8 @@ MonoBehaviour:
     type: 3}
   minionWithinRange: []
   TriggerRange: {fileID: 1466075887788623119}
+  Enemy_Tag: 
+  Ally_Tag: 
 --- !u!135 &1466075887788623119
 SphereCollider:
   m_ObjectHideFlags: 0
