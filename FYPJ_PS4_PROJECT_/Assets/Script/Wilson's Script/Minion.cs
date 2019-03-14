@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 //base class for enemies
 public class Minion : MonoBehaviour
@@ -20,20 +21,41 @@ public class Minion : MonoBehaviour
     public Image healthBar;
     public GameObject meleeProjectile;
 
+    public List<GameObject> minionWithinRange;//Keep track of which unit is within range
+
+    public SphereCollider TriggerRange;
+    //public CylinderCollider TriggerRange;
+
     protected float CountDownTimer;
     protected float OriginalTimer;
 
     protected StateMachine stateMachine = new StateMachine();
 
+    public string Enemy_Tag;
+    public string Ally_Tag;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (this.tag == "Ally_Unit")
+        {
+            Enemy_Tag = "Enemy_Unit";
+            Ally_Tag = "Ally_Unit";
+        }
+        else if (this.tag == "Enemy_Unit")
+        {
+            Enemy_Tag = "Ally_Unit";
+            Ally_Tag = "Enemy_Unit";
+        }
+
         isAlive = true;
         startHealthvalue = healthValue;
+        TriggerRange.radius = rangeValue;
+
         if (attackSpeedValue > 0)
         {
             CountDownTimer = 1 / attackSpeedValue;
-            Debug.Log("CountDownTimer : " + CountDownTimer);
+            //Debug.Log("CountDownTimer : " + CountDownTimer);
         }
         else
         {
@@ -42,6 +64,15 @@ public class Minion : MonoBehaviour
         }
 
         OriginalTimer = CountDownTimer;
+
+        ChangeToMoveState();
+
+        //Debug.Log("Start_Minion");
+    }
+
+    protected void ChangeToMoveState()
+    {
+        this.stateMachine.ChangeState(new MovingState(this.GetComponent<NavMeshAgent>(), moveSpeedValue));//state machine
     }
 
     public float GetHealth()
@@ -122,21 +153,6 @@ public class Minion : MonoBehaviour
         //Debug.Log("Update Health : " + healthValue + " / " + startHealthvalue);
     }
 
-    public virtual void Attack()
-    {
-
-    }
-
-    public void MeleeAttack()
-    {
-
-    }
-
-    public virtual void RangedAttack()
-    {
-
-    }
-
     public GameObject FindNearestUnit(Vector3 unit_position)
     {
         float nearest = float.MaxValue;
@@ -210,38 +226,56 @@ public class Minion : MonoBehaviour
 
         stateMachine.ExecuteStateUpdate();
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameObject _meleeProjectile = Instantiate(meleeProjectile, this.transform);
-        }
-        //Attack();
-        //Debug.Log("Update Health : " + healthValue + " / " + startHealthvalue);
-        
-        if (CountDownTimer <= 0)
-        {
-            Attack();
-            CountDownTimer = OriginalTimer;
-            //Debug.Log("Original : " + OriginalTimer);
-        }
-        else
-        {
-            CountDownTimer -= Time.deltaTime;
-        }
-
         //Debug.Log("Countdown : " + CountDownTimer);
 
         UpdateHealth();
+        Unit_Self_Update();
 
         if (healthValue <= 0)
         {
-            //Debug.Log("He dead boy");
-            Destroy(this.gameObject);
+            minionWithinRange.Remove(this.gameObject);
+            
+            //Destroy(this.gameObject);
+        }
+        //Debug.Log(this.name + "How many in list : " + minionWithinRange.Count);
+
+    }
+
+    public virtual void Unit_Self_Update()
+    {
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        //For Making sure if the object is already added, don't add again
+        for (int i = 0; i < minionWithinRange.Count; ++i)
+        {
+            if (other.gameObject == minionWithinRange[i])
+            {
+                return;
+            }
+        }
+
+        if (other.tag == "Ally_Unit" || other.tag == "Enemy_Unit")
+        {
+            minionWithinRange.Add(other.gameObject);
         }
     }
 
-    private void OnDrawGizmosSelected()
+    void OnTriggerExit(Collider other)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, rangeValue);
+
+        for (int i = 0; i < minionWithinRange.Count; ++i)
+        {
+            if (minionWithinRange[i] == other.gameObject)
+                minionWithinRange.Remove(minionWithinRange[i]);
+        }
     }
+
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, rangeValue);
+    //}
 }

@@ -34,4 +34,6 @@ public class SpawnUnit : MonoBehaviour
         thisnew.transform.parent = null;
         //Destroy(this.gameObject);
     }
+
+   
 }

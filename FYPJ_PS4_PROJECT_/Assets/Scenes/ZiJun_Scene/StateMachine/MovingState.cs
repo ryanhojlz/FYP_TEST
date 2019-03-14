@@ -22,7 +22,7 @@ public class MovingState : IState
 
     public void Execute()
     {
-        Debug.Log(agent.velocity);
+        //Debug.Log(agent.velocity);
 
         Vector3 front = new Vector3(agent.velocity.x, agent.velocity.y, agent.velocity.z);
         front.Normalize();
@@ -37,6 +37,7 @@ public class MovingState : IState
 
     public void Exit()
     {
+        //Debug.Log("Exited Move State");
         this.agent.speed = 0;//Stop the agent from moving outside this state
     }
 }

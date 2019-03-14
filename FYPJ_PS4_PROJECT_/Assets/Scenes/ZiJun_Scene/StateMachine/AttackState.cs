@@ -5,26 +5,43 @@ using UnityEngine.AI;
 
 public class AttackState : IState
 {
-    NavMeshAgent agent;
-    float attackValue;
+    Attack_Unit unit;
+    List<GameObject> targetList;
+    string Enemy_Tag;
 
-    public AttackState(NavMeshAgent _agent, float _attackValue)//assume that passing of values is needed
+    public AttackState(Attack_Unit _unit, List<GameObject> _Enemy, string _Enemy_Tag)//assume that passing of values is needed
     {
-        this.agent = _agent;
-        this.attackValue = _attackValue;
+        unit = _unit;
+        //_unit.target = Enemy;
+        //target = _target;
+        targetList = _Enemy;
+        Enemy_Tag = _Enemy_Tag;
     }
 
-    public void Enter()
+    public void Enter()//Assign A unit
     {
         //spawn melee projectile
+        if (targetList.Count > 0)
+        {
+            for (int i = 0; i < targetList.Count; ++i)
+            {
+                if (!targetList[i])
+                    continue;
+
+                if (targetList[i].tag == Enemy_Tag)
+                {
+                    unit.SetTarget(targetList[i]);// = targetList[i];
+                }
+            }
+        }
     }
 
     public void Execute()
     {
-        
-        //throw melee projectile
-        //give timer for projectile befoe the projectile gets destoryed
-        //load animation of the melee attack
+        if (unit.GetTarget() != null)
+        {
+            unit.Attack();
+        }
     }
 
     public void Exit()
