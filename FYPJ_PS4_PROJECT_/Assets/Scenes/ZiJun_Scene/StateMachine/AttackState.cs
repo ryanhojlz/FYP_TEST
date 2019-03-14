@@ -18,7 +18,7 @@ public class AttackState : IState
         Enemy_Tag = _Enemy_Tag;
     }
 
-    public void Enter()//Assign A unit
+    public void Enter()//Assign A unitt
     {
         //spawn melee projectile
         if (targetList.Count > 0)

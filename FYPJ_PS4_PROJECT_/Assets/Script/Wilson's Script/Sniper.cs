@@ -10,7 +10,7 @@ public class Sniper : Attack_Unit
     //// Start is called before the first frame update
     //void Start()
     //{
-    //    isAlive = true;
+    //    isAlive = true
     //}
 
     //public override void Attack()
