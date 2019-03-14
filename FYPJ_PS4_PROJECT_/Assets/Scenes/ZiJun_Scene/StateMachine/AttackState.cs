@@ -21,7 +21,6 @@ public class AttackState : IState
 
     public void Execute()
     {
-        
         //throw melee projectile
         //give timer for projectile befoe the projectile gets destoryed
         //load animation of the melee attack
@@ -30,6 +29,5 @@ public class AttackState : IState
     public void Exit()
     {
         
-    }
-
+    }    
 }

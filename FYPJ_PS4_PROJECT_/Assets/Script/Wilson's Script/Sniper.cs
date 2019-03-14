@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sniper : Minion
 {
-    Gun gun = new Gun(); //Sniper has a gun
+    //Gun gun = new Gun(); //Sniper has a gun
     GameObject target;
 
     // Start is called before the first frame update
@@ -24,7 +24,7 @@ public class Sniper : Minion
         if (target)
         {
             target.GetComponent<Minion>().TakeDamage(attackValue);
-            gun.Shoot();
+            //gun.Shoot();
         }
     }
 

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Turret : MonoBehaviour
 {
-    public Transform target;
+    private Transform target;
     public float range = 15f;
     public Transform partToRotate;
     public float turnSpeed = 10f;
@@ -23,7 +23,7 @@ public class Gun : MonoBehaviour
     {
         //meant for auto shooting turrets, if it's a gun operated by the player, how?
         //add if statement to check if operated by player or AI?
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy_Unit");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Ally_Unit");
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
