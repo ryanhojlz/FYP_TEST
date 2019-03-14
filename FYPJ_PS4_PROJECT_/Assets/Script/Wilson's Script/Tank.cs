@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Tank : Attack_Unit
 {
-
+    public GameObject bulletPrefab;
     public override void Attack()
     {
         //target = FindNearestUnit(transform.position);
@@ -17,14 +17,17 @@ public class Tank : Attack_Unit
         if (CountDownTimer <= 0)
         {
             CountDownTimer = OriginalTimer;
-            target.GetComponent<Minion>().TakeDamage(attackValue);
+            Shoot();
+            //target.GetComponent<Minion>().TakeDamage(attackValue);
         }
         else
         {
             CountDownTimer -= Time.deltaTime;
         }
 
-        
+
+
+
         //MeleeAttack();
     }
 
@@ -43,6 +46,15 @@ public class Tank : Attack_Unit
         {
             ChangeToMoveState();
         }
+    }
+
+    void Shoot()
+    {
+        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
+        Bullet bullet = bulletGO.GetComponent<Bullet>();
+
+        if (bullet != null)
+            bullet.Seek(target.transform);
     }
 
 }
