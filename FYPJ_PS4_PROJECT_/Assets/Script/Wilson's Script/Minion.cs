@@ -70,6 +70,11 @@ public class Minion : MonoBehaviour
         //Debug.Log("Start_Minion");
     }
 
+    public float GetCountDownTimer()
+    {
+        return CountDownTimer;
+    }
+
     protected void ChangeToMoveState()
     {
         this.stateMachine.ChangeState(new MovingState(this.GetComponent<NavMeshAgent>(), moveSpeedValue));//state machine
@@ -161,72 +166,72 @@ public class Minion : MonoBehaviour
         //Debug.Log("Update Health : " + healthValue + " / " + startHealthvalue);
     }
 
-    public GameObject FindNearestUnit(Vector3 unit_position)
-    {
-        float nearest = float.MaxValue;
-        GameObject targetGameObject = null;
+    //public GameObject FindNearestUnit(Vector3 unit_position)
+    //{
+    //    float nearest = float.MaxValue;
+    //    GameObject targetGameObject = null;
 
-        Ray CastToGround = new Ray(unit_position, Vector3.down);
-        RaycastHit hit;
-        RaycastHit Target_hit;
-        Vector3 PlayerPos;
-        Physics.Raycast(CastToGround, out hit);//Ray casting the player position
+    //    Ray CastToGround = new Ray(unit_position, Vector3.down);
+    //    RaycastHit hit;
+    //    RaycastHit Target_hit;
+    //    Vector3 PlayerPos;
+    //    Physics.Raycast(CastToGround, out hit);//Ray casting the player position
 
-        if (Physics.Raycast(CastToGround, out hit))
-        {
-            PlayerPos = hit.point;
+    //    if (Physics.Raycast(CastToGround, out hit))
+    //    {
+    //        PlayerPos = hit.point;
             
 
-            if (this.tag == "Ally_Unit")//Checking for Ally faction
-            {
-                targetList = GameObject.FindGameObjectsWithTag("Enemy_Unit");
+    //        //if (this.tag == "Ally_Unit")//Checking for Ally faction
+    //        //{
+    //        //    targetList = GameObject.FindGameObjectsWithTag("Enemy_Unit");
                 
-                foreach (GameObject GO in targetList)
-                {
-                    //Debug.Log(tag);
+    //        //    foreach (GameObject GO in targetList)
+    //        //    {
+    //        //        //Debug.Log(tag);
 
-                    CastToGround = new Ray(GO.transform.position, Vector3.down);
-                    Physics.Raycast(CastToGround, out Target_hit);
-                    Vector3 waypointPos = Target_hit.point;
+    //        //        CastToGround = new Ray(GO.transform.position, Vector3.down);
+    //        //        Physics.Raycast(CastToGround, out Target_hit);
+    //        //        Vector3 waypointPos = Target_hit.point;
 
-                    float dist = (PlayerPos - waypointPos).magnitude;
+    //        //        float dist = (PlayerPos - waypointPos).magnitude;
 
-                    if (dist < nearest)
-                    {
-                        nearest = dist;
-                        targetGameObject = GO;
-                        //Debug.Log("Ally found");
-                    }
-                }
+    //        //        if (dist < nearest)
+    //        //        {
+    //        //            nearest = dist;
+    //        //            targetGameObject = GO;
+    //        //            //Debug.Log("Ally found");
+    //        //        }
+    //        //    }
 
-            }
-            else
-            {
-                targetList = GameObject.FindGameObjectsWithTag("Ally_Unit");
+    //        //}
+    //        //else
+    //        //{
+    //        //    targetList = GameObject.FindGameObjectsWithTag("Ally_Unit");
 
-                foreach (GameObject GO in targetList)
-                {
-                    //Debug.Log(tag);
+    //        //    foreach (GameObject GO in targetList)
+    //        //    {
+    //        //        //Debug.Log(tag);
 
-                    CastToGround = new Ray(GO.transform.position, Vector3.down);
-                    Physics.Raycast(CastToGround, out Target_hit);
-                    Vector3 waypointPos = Target_hit.point;
+    //        //        CastToGround = new Ray(GO.transform.position, Vector3.down);
+    //        //        Physics.Raycast(CastToGround, out Target_hit);
+    //        //        Vector3 waypointPos = Target_hit.point;
 
-                    float dist = (PlayerPos - waypointPos).magnitude;
+    //        //        float dist = (PlayerPos - waypointPos).magnitude;
 
-                    if (dist < nearest)
-                    {
-                        nearest = dist;
-                        targetGameObject = GO;
-                        //Debug.Log("Enemy found");
-                    }
-                }
-            }
-        }
+    //        //        if (dist < nearest)
+    //        //        {
+    //        //            nearest = dist;
+    //        //            targetGameObject = GO;
+    //        //            //Debug.Log("Enemy found");
+    //        //        }
+    //        //    }
+    //        //}
+    //    }
 
-        //Debug.Log(targetGameObject.name);
-        return targetGameObject;
-    }
+    //    //Debug.Log(targetGameObject.name);
+    //    return targetGameObject;
+    //}
 
     // Update is called once per frame
     void Update()
@@ -249,6 +254,45 @@ public class Minion : MonoBehaviour
 
     }
 
+    public bool CheckMinionWithinRange(Minion unit)
+    {
+        if (this.gameObject == unit)//Unlikely happen but just in-case it detect itself in list somehow
+            return false;
+
+        Ray ThisToGround = new Ray(this.gameObject.transform.position, Vector3.down);
+        Ray TargetToGround = new Ray(unit.gameObject.transform.position, Vector3.down);
+
+        RaycastHit ThisPos;
+        RaycastHit TargetPos;
+
+        Physics.Raycast(ThisToGround, out ThisPos);
+        Physics.Raycast(TargetToGround, out TargetPos);
+
+        if ((ThisPos.point - TargetPos.point).magnitude <= rangeValue)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public float CheckDist(Minion unit)//Does not metter which is first
+    {
+        Vector3 pos1 = this.gameObject.transform.position;
+        Vector3 pos2 = unit.gameObject.transform.position;
+
+        Ray ThisToGround = new Ray(pos1, Vector3.down);
+        Ray TargetToGround = new Ray(pos2, Vector3.down);
+
+        RaycastHit ThisPos;
+        RaycastHit TargetPos;
+
+        Physics.Raycast(ThisToGround, out ThisPos);
+        Physics.Raycast(TargetToGround, out TargetPos);
+
+        return (ThisPos.point - TargetPos.point).magnitude;
+    }
+
     public virtual void Unit_Self_Update()
     {
 
@@ -256,6 +300,9 @@ public class Minion : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (!other.gameObject.GetComponent<Rigidbody>())
+            return;
+
         //For Making sure if the object is already added, don't add again
         for (int i = 0; i < minionWithinRange.Count; ++i)
         {
@@ -281,9 +328,9 @@ public class Minion : MonoBehaviour
         }
     }
 
-    //private void OnDrawGizmosSelected()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(transform.position, rangeValue);
-    //}
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, rangeValue);
+    }
 }

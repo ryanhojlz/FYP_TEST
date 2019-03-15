@@ -51,8 +51,6 @@ public class TestUnit_Control : MonoBehaviour
             }
         }
 
-
-
         if (character != null)
         {
             if (agent.remainingDistance > agent.stoppingDistance)
