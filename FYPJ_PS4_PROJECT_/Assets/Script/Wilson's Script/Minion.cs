@@ -135,6 +135,14 @@ public class Minion : MonoBehaviour
         isAlive = toggle;
     }
 
+    public void Die()
+    {
+        if (isAlive == false) 
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void TakeDamage(float dmgAmount)
     {
         healthValue -= dmgAmount;
