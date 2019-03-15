@@ -10,14 +10,15 @@ public class MovingState : IState
     public MovingState(NavMeshAgent _agent, float _movespeed)
     {
         //Debug.Log(_movespeed);
-
+        
         this.agent = _agent;
         this.movespeed = _movespeed;
+        this.agent.speed = movespeed;
     }
 
     public void Enter()
     {
-        agent.speed = movespeed;
+        this.agent.isStopped = false;
     }
 
     public void Execute()
@@ -38,6 +39,7 @@ public class MovingState : IState
     public void Exit()
     {
         //Debug.Log("Exited Move State");
-        this.agent.speed = 0;//Stop the agent from moving outside this state
+        //this.agent.speed = 0;//Stop the agent from moving outside this state
+        this.agent.isStopped = true;
     }
 }

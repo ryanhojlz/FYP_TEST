@@ -25,10 +25,6 @@ public class Tank : Attack_Unit
             CountDownTimer -= Time.deltaTime;
         }
 
-
-
-
-        //MeleeAttack();
     }
 
     public override void Unit_Self_Update()
@@ -51,10 +47,13 @@ public class Tank : Attack_Unit
     void Shoot()
     {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
-        Bullet bullet = bulletGO.GetComponent<Bullet>();
+        MeleeProjectile bullet = bulletGO.GetComponent<MeleeProjectile>();
 
         if (bullet != null)
+        {
             bullet.Seek(target.transform);
+            bullet.SetBase(this);
+        }
     }
 
 }
