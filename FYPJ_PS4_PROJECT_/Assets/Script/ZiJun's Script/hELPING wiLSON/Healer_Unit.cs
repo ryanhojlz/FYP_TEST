@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Healer_Unit : Minion
 {
-    protected GameObject target;
 
     public virtual void Attack()
     {

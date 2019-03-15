@@ -143,8 +143,10 @@ public class Minion : MonoBehaviour
 
     public void Die()
     {
-        if (isAlive == false) 
+        //Can add timer and other stuff
+        if (isActive == false) 
         {
+            Debug.Log("Destroying");
             Destroy(gameObject);
         }
     }
@@ -264,7 +266,9 @@ public class Minion : MonoBehaviour
             //Destroy(gameObject.GetComponent<NavMeshAgent>());
 
             target = null;
-            this.SetIsActive(false);
+            //this.SetIsActive(false);
+
+            this.stateMachine.ChangeState(new DeadState(this.GetComponent<NavMeshAgent>(), this));//state machine
 
             //Physics.IgnoreCollision(this.GetComponent<Collider>());
         }
@@ -347,6 +351,26 @@ public class Minion : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.GetComponent<Rigidbody>())
+            return;
+
+        //For Making sure if the object is already added, don't add again
+        for (int i = 0; i < minionWithinRange.Count; ++i)
+        {
+            if (other.gameObject == minionWithinRange[i])
+            {
+                return;
+            }
+        }
+
+        if (other.tag == "Ally_Unit" || other.tag == "Enemy_Unit")
+        {
+            minionWithinRange.Add(other.gameObject);
+        }
+    }
+
+    void OnTriggerStay(Collider other)
     {
         if (!other.gameObject.GetComponent<Rigidbody>())
             return;

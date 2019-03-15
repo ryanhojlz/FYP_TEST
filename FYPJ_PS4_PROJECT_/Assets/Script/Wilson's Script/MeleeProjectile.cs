@@ -24,7 +24,17 @@ public class MeleeProjectile : MonoBehaviour
             return;
 
         if (!UnitThatShoots)
+        {
+            Destroy(gameObject);
             return;
+        }
+
+        if (!target)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         //if (lifeTime <= 0f && this)
         //{
         //    Debug.Log("Destroy projectile");

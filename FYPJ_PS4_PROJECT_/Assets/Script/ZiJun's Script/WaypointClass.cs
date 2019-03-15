@@ -12,7 +12,7 @@ public class WaypointClass : MonoBehaviour
     void Start()
     {
         //AddWaypoint();
-        Destroy(this.GetComponent<MeshFilter>());
+        //Destroy(this.GetComponent<MeshFilter>());
     }
 
     void Update()

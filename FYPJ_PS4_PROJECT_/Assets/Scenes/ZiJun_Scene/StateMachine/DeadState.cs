@@ -1,30 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DeadState : IState
 {
     Minion unit;
-    List<GameObject> targetList;
-    string Minion_Tag;
+    NavMeshAgent agent;
 
     //need to pass values for the dead state?
-    public DeadState(Minion _unit, List<GameObject> minion, string _Minion_Tag)
+    public DeadState(NavMeshAgent _agent, Minion _unit)
     {
         unit = _unit;
-        //_unit.target = Enemy;
-        //target = _target;
-        targetList = minion;
-        Minion_Tag = _Minion_Tag;
+        agent = _agent;
     }
 
     public void Enter()
     {
-        unit.SetIsAlive(false);
+        unit.SetIsActive(false);
     }
 
     public void Execute()
     {
+        Debug.Log("Destroying");
         unit.Die();
     }
 
