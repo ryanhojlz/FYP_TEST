@@ -57,7 +57,13 @@ public class AttackState : IState
 
     public void Execute()
     {
+        if (!unit.GetTarget())
+        {
+            return;
+        }
+
         NavMeshAgent agent = unit.gameObject.GetComponent<NavMeshAgent>();
+
         if (!unit.CheckMinionWithinRange(unit.GetTarget().GetComponent<Minion>()))//If not within attack range
         {
             agent.isStopped = false;

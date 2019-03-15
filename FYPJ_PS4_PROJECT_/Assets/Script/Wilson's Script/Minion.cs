@@ -16,7 +16,7 @@ public class Minion : MonoBehaviour
     public float attackSpeedValue;
     public float moveSpeedValue;
     public float rangeValue;
-    public bool isAlive;
+    public bool isActive;
     public GameObject[] targetList; //enemy or ally also can
     public Image healthBar;
     public GameObject meleeProjectile;
@@ -28,6 +28,7 @@ public class Minion : MonoBehaviour
 
     protected float CountDownTimer;
     protected float OriginalTimer;
+    protected GameObject target;
 
     protected StateMachine stateMachine = new StateMachine();
 
@@ -48,7 +49,7 @@ public class Minion : MonoBehaviour
             Ally_Tag = "Enemy_Unit";
         }
 
-        isAlive = true;
+        isActive = true;
         startHealthvalue = healthValue;
         TriggerRange.radius = rangeValue;
 
@@ -130,14 +131,14 @@ public class Minion : MonoBehaviour
         defenceValue = _defence;
     }
 
-    public bool GetIsAlive()
+    public bool GetIsActive()
     {
-        return isAlive;
+        return isActive;
     }
 
-    public void SetIsAlive(bool toggle)
+    public void SetIsActive(bool toggle)
     {
-        isAlive = toggle;
+        isActive = toggle;
     }
 
     public void TakeDamage(float dmgAmount)
@@ -148,7 +149,7 @@ public class Minion : MonoBehaviour
         //Have to multiply by defence value to reduce the damage taken
         if (healthValue <= 0)
         {
-            SetIsAlive(false);
+            SetIsActive(false);
         }
     }
 
@@ -228,22 +229,69 @@ public class Minion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateHealth();
 
         stateMachine.ExecuteStateUpdate();
 
         //Debug.Log("Countdown : " + CountDownTimer);
 
-        UpdateHealth();
-        Unit_Self_Update();
+       
+        Unit_Self_Update();//Update for indivisual units (unique to 1 unit) 
+        UpdateCheckList();//Checking for unit in the list. If it is not active, remove it
+        CheckTargetActive();//Check if your target is active. If not active target becomes null
+
+
+        if (!target)
+        {
+            ChangeToMoveState();
+        }
 
         if (healthValue <= 0)
         {
-            minionWithinRange.Remove(this.gameObject);
-            
+            //target = null;
+            //minionWithinRange.Remove(this.gameObject);
             //Destroy(this.gameObject);
+            //Destroy(gameObject.GetComponent<CapsuleCollider>());
+            //Destroy(gameObject.GetComponent<Rigidbody>());
+            //Destroy(gameObject.GetComponent<NavMeshAgent>());
+
+            target = null;
+            this.SetIsActive(false);
+
+            //Physics.IgnoreCollision(this.GetComponent<Collider>());
         }
         //Debug.Log(this.name + "How many in list : " + minionWithinRange.Count);
+        //if (!isActive)
+        //{
+        //    Destroy(this.gameObject);
+        //}
+    }
 
+    void UpdateCheckList()
+    {
+        for (int i = 0; i < minionWithinRange.Count; ++i)
+        {
+            if (!minionWithinRange[i].GetComponent<Minion>().GetIsActive())
+            {
+                RemoveUnitFromList(minionWithinRange[i].GetComponent<Minion>());
+            }
+        }
+    }
+
+    void CheckTargetActive()
+    {
+        if (!target)
+            return;
+
+        if (!target.GetComponent<Minion>().GetIsActive())
+        {
+            target = null;
+        }
+    }
+
+    public void RemoveUnitFromList(Minion unit)
+    {
+        minionWithinRange.Remove(unit.gameObject);
     }
 
     public bool CheckMinionWithinRange(Minion unit)
@@ -268,7 +316,7 @@ public class Minion : MonoBehaviour
         return false;
     }
 
-    public float CheckDist(Minion unit)//Does not metter which is first
+    public float CheckDist(Minion unit)//Does not matter which is first
     {
         Vector3 pos1 = this.gameObject.transform.position;
         Vector3 pos2 = unit.gameObject.transform.position;

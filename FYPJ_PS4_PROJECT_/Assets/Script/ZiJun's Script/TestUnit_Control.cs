@@ -26,6 +26,12 @@ public class TestUnit_Control : MonoBehaviour
         //this.sm.ExecuteStateUpdate();
         //Debug.Log(pathIndex);
 
+        if (!GetComponent<Minion>().GetIsActive())
+        {
+            agent.isStopped = true;
+            return;
+        }
+
         pathIndex = tempPathManager.GetComponent<PathManager>().AssignPath(transform.position, this.tag);
         if (pathIndex <= -1)//If there is no path, dont continue
         {

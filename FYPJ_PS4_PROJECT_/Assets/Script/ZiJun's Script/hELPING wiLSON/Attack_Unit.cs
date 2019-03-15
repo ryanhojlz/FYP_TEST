@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Attack_Unit : Minion
 {
-    protected GameObject target;
-
     public virtual void Attack()
     {
 

@@ -20,7 +20,10 @@ public class MeleeProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!this || !UnitThatShoots)
+        if (!this)
+            return;
+
+        if (!UnitThatShoots)
             return;
         //if (lifeTime <= 0f && this)
         //{
@@ -28,7 +31,6 @@ public class MeleeProjectile : MonoBehaviour
         //    Destroy(this.gameObject);
         //    return;//Stop updating after deleting
         //}
-
         float dist_between = (UnitThatShoots.position - target.position).magnitude;
 
         speed = (dist_between / AnimationSpeed);
