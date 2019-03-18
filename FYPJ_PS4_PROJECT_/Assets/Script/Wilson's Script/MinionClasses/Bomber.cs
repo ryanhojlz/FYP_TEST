@@ -15,4 +15,17 @@ public class Bomber : Attack_Unit
     {
         
     }
+
+    public override void Attack()
+    {
+
+    }
+
+    public override void Unit_Self_Update()
+    {
+        if (minionWithinRange.Count > 0)
+        {
+            this.stateMachine.ChangeState(new AttackState(this, minionWithinRange, Enemy_Tag));
+        }
+    }
 }
