@@ -26,6 +26,9 @@ public class TestUnit_Control : MonoBehaviour
         //this.sm.ExecuteStateUpdate();
         //Debug.Log(pathIndex);
 
+        if (this.gameObject.GetComponent<Minion>().GetTarget())
+            return;
+
         if (!GetComponent<Minion>().GetIsActive())
         {
             agent.isStopped = true;
@@ -38,7 +41,7 @@ public class TestUnit_Control : MonoBehaviour
             return;
         }
 
-        //agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
+        agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
 
         if (waypointIndex < tempPathManager.GetComponent<PathManager>().GetPathWaypointCount(pathIndex))
         {
@@ -51,7 +54,7 @@ public class TestUnit_Control : MonoBehaviour
                     {
                         // Done
                         ++waypointIndex;
-                        agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
+                        //agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
                     }
                 }
             }

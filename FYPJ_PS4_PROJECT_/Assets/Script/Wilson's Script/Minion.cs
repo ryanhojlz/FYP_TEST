@@ -413,4 +413,14 @@ public class Minion : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, rangeValue);
     }
+
+    public void SetTarget(GameObject _target)
+    {
+        target = _target;
+    }
+
+    public GameObject GetTarget()
+    {
+        return target;
+    }
 }

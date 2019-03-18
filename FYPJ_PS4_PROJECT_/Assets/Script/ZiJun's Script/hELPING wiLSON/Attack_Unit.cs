@@ -8,14 +8,4 @@ public class Attack_Unit : Minion
     {
 
     }
-
-    public void SetTarget(GameObject _target)
-    {
-        target = _target;
-    }
-
-    public GameObject GetTarget()
-    {
-        return target;
-    }
 }
