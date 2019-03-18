@@ -316,16 +316,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7750817691118526209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d44d6cdf6cf84b9449b8ca0143c00c20, type: 3}
+  m_Script: {fileID: 11500000, guid: 171f3c5003a03034fa09c7b4aa929438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthValue: 2
+  healthValue: 10
   attackValue: 1
-  defenceValue: 10
+  defenceValue: 1
   attackSpeedValue: 1
   moveSpeedValue: 5
   rangeValue: 10
-  isAlive: 0
+  isActive: 0
   targetList: []
   healthBar: {fileID: 7750817690676117659}
   meleeProjectile: {fileID: 2243666706149067221, guid: 20f42f92e7c7bce4187ebb7cea1bd547,

@@ -13,7 +13,7 @@ public class CombatMedic : Healer_Unit
         startHealthvalue = healthValue;
         attackValue = 30;
 
-        isAlive = true;
+        isActive = true;
     }
 
     public override void Healing(float HealValue)

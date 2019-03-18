@@ -18,6 +18,7 @@ public class MovingState : IState
 
     public void Enter()
     {
+        if(agent)
         this.agent.isStopped = false;
     }
 
@@ -40,6 +41,7 @@ public class MovingState : IState
     {
         //Debug.Log("Exited Move State");
         //this.agent.speed = 0;//Stop the agent from moving outside this state
+        if(agent)
         this.agent.isStopped = true;
     }
 }
