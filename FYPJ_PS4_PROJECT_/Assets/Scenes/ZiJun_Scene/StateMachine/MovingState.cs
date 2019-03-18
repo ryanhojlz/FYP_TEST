@@ -18,6 +18,7 @@ public class MovingState : IState
 
     public void Enter()
     {
+        //Debug.Log(agent.tag);
         this.agent.isStopped = false;
     }
 

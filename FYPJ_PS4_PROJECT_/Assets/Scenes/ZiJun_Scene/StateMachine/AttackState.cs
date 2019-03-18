@@ -57,6 +57,7 @@ public class AttackState : IState
 
     public void Execute()
     {
+        
         if (!unit.GetTarget())
         {
             return;
@@ -68,6 +69,10 @@ public class AttackState : IState
         {
             agent.isStopped = false;
             agent.SetDestination(unit.GetTarget().gameObject.transform.position);
+
+            if (unit.tag == "Ally_Unit" && unit.GetTarget())
+                Debug.Log(unit.tag + " : " + unit.GetTarget().name);
+            //Debug.Log(unit.tag + " : " + Enemy_Tag);
             //agent.speed = unit.moveSpeedValue;
             //return;
         }

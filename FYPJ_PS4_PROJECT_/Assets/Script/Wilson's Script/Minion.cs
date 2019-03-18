@@ -146,7 +146,7 @@ public class Minion : MonoBehaviour
         //Can add timer and other stuff
         if (isActive == false) 
         {
-            Debug.Log("Destroying");
+            //Debug.Log("Destroying");
             Destroy(gameObject);
         }
     }
@@ -283,10 +283,18 @@ public class Minion : MonoBehaviour
     {
         for (int i = 0; i < minionWithinRange.Count; ++i)
         {
+            if (!minionWithinRange[i])
+            {
+                RemoveUnitFromList(minionWithinRange[i]);
+                //RemoveUnitFromList(minionWithinRange[i].GetComponent<Minion>());
+                continue;
+            }
+
             if (!minionWithinRange[i].GetComponent<Minion>().GetIsActive())
             {
-                RemoveUnitFromList(minionWithinRange[i].GetComponent<Minion>());
+                RemoveUnitFromList(minionWithinRange[i]);
             }
+
         }
     }
 
@@ -301,9 +309,9 @@ public class Minion : MonoBehaviour
         }
     }
 
-    public void RemoveUnitFromList(Minion unit)
+    public void RemoveUnitFromList(GameObject unit)
     {
-        minionWithinRange.Remove(unit.gameObject);
+        minionWithinRange.Remove(unit);
     }
 
     public bool CheckMinionWithinRange(Minion unit)

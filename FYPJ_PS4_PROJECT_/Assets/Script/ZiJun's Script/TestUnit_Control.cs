@@ -38,7 +38,7 @@ public class TestUnit_Control : MonoBehaviour
             return;
         }
 
-        agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
+        //agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
 
         if (waypointIndex < tempPathManager.GetComponent<PathManager>().GetPathWaypointCount(pathIndex))
         {
@@ -51,7 +51,7 @@ public class TestUnit_Control : MonoBehaviour
                     {
                         // Done
                         ++waypointIndex;
-                        //agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
+                        agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
                     }
                 }
             }
