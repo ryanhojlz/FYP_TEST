@@ -23,6 +23,8 @@ public class WaypointClass : MonoBehaviour
         {
             this.position = transform.position;
             this.RayCastPosition = hit.point;
+
+            Debug.Log(position);
         }
     }
 

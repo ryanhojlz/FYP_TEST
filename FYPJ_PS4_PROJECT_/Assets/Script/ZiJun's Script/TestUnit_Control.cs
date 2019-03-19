@@ -29,6 +29,8 @@ public class TestUnit_Control : MonoBehaviour
         if (this.gameObject.GetComponent<Minion>().GetTarget())
             return;
 
+        //Debug.Log(waypointIndex);
+
         if (!GetComponent<Minion>().GetIsActive())
         {
             agent.isStopped = true;
@@ -43,7 +45,7 @@ public class TestUnit_Control : MonoBehaviour
 
         agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
 
-        if (waypointIndex < tempPathManager.GetComponent<PathManager>().GetPathWaypointCount(pathIndex))
+        if (waypointIndex < tempPathManager.GetComponent<PathManager>().GetPathWaypointCount(pathIndex) - 1)
         {
             //If waypoint has reached, goes to the next path
             if (!agent.pathPending)
@@ -53,7 +55,11 @@ public class TestUnit_Control : MonoBehaviour
                     if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                     {
                         // Done
+                        int currentWaypoint = waypointIndex;
+                       
                         ++waypointIndex;
+
+                        //Debug.Log("Current : " + currentWaypoint + ", " + waypointIndex);
                         //agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
                     }
                 }

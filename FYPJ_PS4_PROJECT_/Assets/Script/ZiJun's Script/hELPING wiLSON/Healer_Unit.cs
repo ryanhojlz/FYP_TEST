@@ -15,16 +15,6 @@ public class Healer_Unit : Minion
 
     }
 
-    public void SetTarget(GameObject _target)
-    {
-        target = _target;
-    }
-
-    public GameObject GetTarget()
-    {
-        return target;
-    }
-
     public virtual void FindAllyToHeal()
     {
 
