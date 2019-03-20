@@ -41,7 +41,7 @@ public class Tank : Attack_Unit
     {
         GameObject bulletGO = (GameObject)Instantiate(meleeProjectile, this.transform.position, this.transform.rotation);
         MeleeProjectile bullet = bulletGO.GetComponent<MeleeProjectile>();
-        attackSound.Play();
+        //attackSound.Play();
 
         if (bullet != null)
         {

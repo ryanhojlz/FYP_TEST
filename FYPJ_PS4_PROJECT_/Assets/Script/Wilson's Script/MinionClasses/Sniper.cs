@@ -48,7 +48,7 @@ public class Sniper : Attack_Unit
     {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
-        attackSound.Play();
+        //attackSound.Play();
 
         if (bullet != null)
             bullet.Seek(target.transform);
