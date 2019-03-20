@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealingProjectile : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class HealingProjectile : MonoBehaviour
     public float AnimationSpeed;
     float speed = 70f;
     float lifeTime = 0f;
+    public GameObject prefabtext;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,7 @@ public class HealingProjectile : MonoBehaviour
 
         if (dir.magnitude <= distanceThisFrame)
         {
+            // SpawnHealText(0f);
             HitTarget();
             return;
         }
@@ -83,6 +86,17 @@ public class HealingProjectile : MonoBehaviour
         Destroy(gameObject);
     }
 
+    void DisplayText(float healAmount)
+    {
+        if (healAmount > 0f)
+        {
+            GameObject newText = Instantiate(prefabtext) as GameObject;
+            //newText.transform.parent = this.transform;
+            newText.transform.position = this.transform.position;
+            newText.GetComponent<TextMesh>().text = "" + healAmount;
+        }
+    }
+
     void Damage(Transform _unit)
     {
         Minion unit = _unit.GetComponent<Minion>();
@@ -107,9 +121,11 @@ public class HealingProjectile : MonoBehaviour
                     healAmount = healPower;
                 }
                 unit.TakeDamage(-healAmount);
+
+                DisplayText(healAmount);
+
             }
 
-            //);
         }
     }
 }
