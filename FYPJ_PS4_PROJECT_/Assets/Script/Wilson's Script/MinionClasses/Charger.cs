@@ -10,14 +10,15 @@ public class Charger : Attack_Unit
         
     }
 
-    public override void Attack()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
         
     }
+
+    public override void Attack()
+    {
+
+    }
+
 }

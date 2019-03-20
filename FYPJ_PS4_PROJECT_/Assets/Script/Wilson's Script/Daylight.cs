@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Drone : Attack_Unit
+public class Daylight : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,11 +13,7 @@ public class Drone : Attack_Unit
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public override void Attack()
-    {
-
+        transform.RotateAround(Vector3.zero, Vector3.right, 10f * Time.deltaTime);
+        transform.LookAt(Vector3.zero);
     }
 }

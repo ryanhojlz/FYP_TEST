@@ -5,6 +5,7 @@ using UnityEngine;
 public class Sniper : Attack_Unit
 {
     public GameObject bulletPrefab;
+    public AudioSource attackSound;
 
     public override void Attack()
     {
@@ -47,6 +48,7 @@ public class Sniper : Attack_Unit
     {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
+        attackSound.Play();
 
         if (bullet != null)
             bullet.Seek(target.transform);

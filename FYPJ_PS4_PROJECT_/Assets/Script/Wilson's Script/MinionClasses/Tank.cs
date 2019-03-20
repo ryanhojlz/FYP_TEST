@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Tank : Attack_Unit
 {
     public GameObject meleeProjectile;
+    public AudioSource attackSound;
 
     public override void Attack()
     {
@@ -40,6 +41,7 @@ public class Tank : Attack_Unit
     {
         GameObject bulletGO = (GameObject)Instantiate(meleeProjectile, this.transform.position, this.transform.rotation);
         MeleeProjectile bullet = bulletGO.GetComponent<MeleeProjectile>();
+        attackSound.Play();
 
         if (bullet != null)
         {

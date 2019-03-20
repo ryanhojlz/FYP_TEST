@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Drone : Attack_Unit
+public class MiniGame : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,10 +14,5 @@ public class Drone : Attack_Unit
     void Update()
     {
         
-    }
-
-    public override void Attack()
-    {
-
     }
 }
