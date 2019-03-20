@@ -105,3 +105,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationSpeed: 0
+  prefabtext: {fileID: 3033654824146842811, guid: 86be161b35fd9f34c9d90f3bf3f43f52,
+    type: 3}

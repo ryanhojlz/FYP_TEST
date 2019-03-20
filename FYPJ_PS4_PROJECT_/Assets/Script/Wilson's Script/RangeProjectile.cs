@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MeleeProjectile : MonoBehaviour
+public class RangeProjectile : MonoBehaviour
 {
     private Transform target;
     private Transform UnitThatShoots;
     public float AnimationSpeed;
-    float speed = 0f;
+    float speed = 70f;
     float lifeTime = 0f;
     public GameObject prefabtext;
 
@@ -42,9 +43,9 @@ public class MeleeProjectile : MonoBehaviour
         //    Destroy(this.gameObject);
         //    return;//Stop updating after deleting
         //}
-        float dist_between = (UnitThatShoots.position - target.position).magnitude;
+        //float dist_between = (UnitThatShoots.position - target.position).magnitude;
 
-        speed = (dist_between / AnimationSpeed);
+        //speed = (dist_between / AnimationSpeed);
 
         if (target == null)
         {
@@ -57,6 +58,7 @@ public class MeleeProjectile : MonoBehaviour
 
         if (dir.magnitude <= distanceThisFrame)
         {
+            // SpawnHealText(0f);
             HitTarget();
             return;
         }
@@ -64,18 +66,6 @@ public class MeleeProjectile : MonoBehaviour
         lifeTime -= Time.deltaTime;
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-    }
-
-    void DisplayText(float DamageAmount)
-    {
-       
-        GameObject newText = Instantiate(prefabtext) as GameObject;
-        //newText.transform.parent = this.transform;
-        newText.transform.position = this.transform.position;
-        newText.GetComponent<TextMesh>().text = "" + DamageAmount;
-        newText.GetComponent<TextMesh>().color = Color.red;
-
-
     }
 
     public void Seek(Transform _target)
@@ -96,14 +86,26 @@ public class MeleeProjectile : MonoBehaviour
         Destroy(gameObject);
     }
 
+    void DisplayText(float DamageAmount)
+    {
+        if (DamageAmount > 0f)
+        {
+            GameObject newText = Instantiate(prefabtext) as GameObject;
+            //newText.transform.parent = this.transform;
+            newText.transform.position = this.transform.position;
+            newText.GetComponent<TextMesh>().text = "" + DamageAmount;
+        }
+    }
+
     void Damage(Transform _unit)
     {
         Minion unit = _unit.GetComponent<Minion>();
 
         if (unit != null)
         {
-            unit.TakeDamage(UnitThatShoots.GetComponent<Minion>().attackValue);
-            DisplayText(UnitThatShoots.GetComponent<Minion>().attackValue);
+            unit.TakeDamage(UnitThatShoots.gameObject.GetComponent<Minion>().attackValue);
+
+            DisplayText(UnitThatShoots.gameObject.GetComponent<Minion>().attackValue);
         }
     }
 }

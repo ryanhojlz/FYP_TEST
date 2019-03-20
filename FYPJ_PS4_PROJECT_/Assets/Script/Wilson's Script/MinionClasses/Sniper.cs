@@ -33,15 +33,6 @@ public class Sniper : Attack_Unit
         {
             this.stateMachine.ChangeState(new AttackState(this, minionWithinRange, Enemy_Tag));
         }
-
-        if (!target)
-        {
-            ChangeToMoveState();
-        }
-        else if (target.GetComponent<Minion>().healthValue <= 0)
-        {
-            ChangeToMoveState();
-        }
     }
 
     void Shoot()

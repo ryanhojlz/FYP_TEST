@@ -32,6 +32,7 @@ public class SpawnUnit : MonoBehaviour
     {
         GameObject thisnew = Instantiate(UnitToSpawn, this.transform);
         thisnew.transform.parent = null;
+        thisnew.transform.position = this.transform.position;
         //Destroy(this.gameObject);
     }
 

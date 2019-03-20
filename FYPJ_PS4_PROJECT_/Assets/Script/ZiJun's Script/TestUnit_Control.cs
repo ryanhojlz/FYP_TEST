@@ -19,10 +19,14 @@ public class TestUnit_Control : MonoBehaviour
         //this.sm.ChangeState(new State_Moving(agent, pathIndex));
         agent.updateRotation = false;
         tempPathManager = GameObject.FindGameObjectWithTag("PathManager");
+        agent.enabled = false;
+        this.GetComponent<Rigidbody>().freezeRotation = true;
+        this.GetComponent<Rigidbody>().isKinematic = false;
     }
     // Update is called once per frame
     void Update()
     {
+        agent.enabled = true;
         //this.sm.ExecuteStateUpdate();
         //Debug.Log(pathIndex);
         if (this.gameObject.GetComponent<Minion>().GetTarget())
