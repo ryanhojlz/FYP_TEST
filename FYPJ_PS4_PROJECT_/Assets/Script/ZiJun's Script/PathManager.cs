@@ -9,13 +9,28 @@ public class PathManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //for (int i = 0; i < PathList.Count; ++i)
+        //{
+        //    for (int j = 0; j < PathList[i].GetComponent<PathClass>().waypointList.Count; ++j)
+        //    {
+        //        Debug.Log(i + " - " + j + " : " + PathList[i].GetComponent<PathClass>().waypointList[j].GetRayCast());
+        //    }
+        //}
+        //Debug.Log("High");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //for (int i = 0; i < PathList.Count; ++i)
+        //{
+        //    for (int j = 0; j < PathList[i].GetComponent<PathClass>().waypointList.Count; ++j)
+        //    {
+        //        Debug.Log(i + " - " + j + " : " + PathList[i].GetComponent<PathClass>().waypointList[j].GetRayCast());
+        //    }
+        //}
+
+        //Debug.Log("High");
     }
 
     public int AssignPath(Vector3 playerpos, string UnitTag)

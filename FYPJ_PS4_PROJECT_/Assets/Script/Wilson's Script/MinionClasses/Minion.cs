@@ -8,8 +8,18 @@ using UnityEngine.AI;
 //base class for enemies
 public class Minion : MonoBehaviour
 {
+    public enum MINIONTYPE
+    {
+        MELEE,
+        RANGE,
+        FLYING
+    }
+
+    public MINIONTYPE MinionType;
+    public List<MINIONTYPE>targetableType;
+
     //base attributes of the enemies
-    protected float startHealthvalue;
+    public float startHealthvalue;
     public float healthValue;
     public float attackValue;
     public float defenceValue;
@@ -19,7 +29,6 @@ public class Minion : MonoBehaviour
     public bool isActive;
     public GameObject[] targetList; //enemy or ally also can
     public Image healthBar;
-    public GameObject meleeProjectile;
 
     public List<GameObject> minionWithinRange;//Keep track of which unit is within range
 
@@ -183,12 +192,12 @@ public class Minion : MonoBehaviour
     //    if (Physics.Raycast(CastToGround, out hit))
     //    {
     //        PlayerPos = hit.point;
-            
+
 
     //        //if (this.tag == "Ally_Unit")//Checking for Ally faction
     //        //{
     //        //    targetList = GameObject.FindGameObjectsWithTag("Enemy_Unit");
-                
+
     //        //    foreach (GameObject GO in targetList)
     //        //    {
     //        //        //Debug.Log(tag);
@@ -245,57 +254,63 @@ public class Minion : MonoBehaviour
 
         //Debug.Log("Countdown : " + CountDownTimer);
 
-       
-        Unit_Self_Update();//Update for indivisual units (unique to 1 unit) 
+
+        Unit_Self_Update();//Update for indivisual units (unique to each type of unit) 
         UpdateCheckList();//Checking for unit in the list. If it is not active, remove it
         CheckTargetActive();//Check if your target is active. If not active target becomes null
 
 
-        if (!target)
+        if (target == null && isActive)
         {
+            Debug.Log(name);
             ChangeToMoveState();
         }
 
         if (healthValue <= 0)
         {
-            //target = null;
-            //minionWithinRange.Remove(this.gameObject);
-            //Destroy(this.gameObject);
-            //Destroy(gameObject.GetComponent<CapsuleCollider>());
-            //Destroy(gameObject.GetComponent<Rigidbody>());
-            //Destroy(gameObject.GetComponent<NavMeshAgent>());
-
             target = null;
-            //this.SetIsActive(false);
-
+           
             this.stateMachine.ChangeState(new DeadState(this.GetComponent<NavMeshAgent>(), this));//state machine
-
-            //Physics.IgnoreCollision(this.GetComponent<Collider>());
         }
-        //Debug.Log(this.name + "How many in list : " + minionWithinRange.Count);
-        //if (!isActive)
-        //{
-        //    Destroy(this.gameObject);
-        //}
+
     }
+
+    private void LateUpdate()
+    {
+        Die();
+    }
+
 
     void UpdateCheckList()
     {
         for (int i = 0; i < minionWithinRange.Count; ++i)
         {
-            if (!minionWithinRange[i])
+            if (!minionWithinRange[i])//If is null remove
             {
+                
+                if (target == minionWithinRange[i])
+                {
+                    Debug.Log("Removed");
+                    target = null;
+                }
+
                 RemoveUnitFromList(minionWithinRange[i]);
                 //RemoveUnitFromList(minionWithinRange[i].GetComponent<Minion>());
                 continue;
             }
 
-            if (!minionWithinRange[i].GetComponent<Minion>().GetIsActive())
+            if (!minionWithinRange[i].GetComponent<Minion>().GetIsActive())//If it is not active remove
             {
+                if (target == minionWithinRange[i])
+                {
+                    target = null;
+                }
+
                 RemoveUnitFromList(minionWithinRange[i]);
             }
 
         }
+        //Debug.Log(this.name + " : " + minionWithinRange.Count);
     }
 
     void CheckTargetActive()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Transform target;
-    public float speed = 70f;
+    float speed = 70f;
 
     // Start is called before the first frame update
     void Start()

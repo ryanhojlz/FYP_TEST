@@ -19,7 +19,8 @@ public class MovingState : IState
     public void Enter()
     {
         //Debug.Log(agent.tag);
-        this.agent.isStopped = false;
+        if(agent.isActiveAndEnabled)
+          this.agent.isStopped = false;
     }
 
     public void Execute()
@@ -29,18 +30,21 @@ public class MovingState : IState
         Vector3 front = new Vector3(agent.velocity.x, agent.velocity.y, agent.velocity.z);
         front.Normalize();
         front += agent.transform.position;
-        
+
 
 
         //new Vector3(agent.velocity.x, agent.velocity.y, agent.velocity.z) + agent.transform.position).normalized()
-        if(!(agent.velocity.magnitude <= 0))
-        agent.transform.LookAt(front);
+        //if(!(agent.velocity.magnitude <= 0))
+        //agent.transform.LookAt(front);
+
+        //agent.gameObject.transform.Rotate(0, Mathf.Atan2(agent.velocity.x, agent.velocity.z), 0);
+
+        //agent.gameObject.transform.rotation = Quaternion.RotateTowards(agent.gameObject.transform.rotation, Quaternion.LookRotation(front), 360).y;
     }
 
     public void Exit()
     {
-        //Debug.Log("Exited Move State");
-        //this.agent.speed = 0;//Stop the agent from moving outside this state
-        this.agent.isStopped = true;
+        if (agent.isActiveAndEnabled)
+            this.agent.isStopped = true;
     }
 }

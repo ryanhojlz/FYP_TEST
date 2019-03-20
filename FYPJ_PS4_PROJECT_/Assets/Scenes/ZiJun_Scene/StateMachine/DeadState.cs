@@ -22,7 +22,7 @@ public class DeadState : IState
 
     public void Execute()
     {
-        Debug.Log("Destroying");
+        //Debug.Log("Destroying");
         unit.Die();
     }
 

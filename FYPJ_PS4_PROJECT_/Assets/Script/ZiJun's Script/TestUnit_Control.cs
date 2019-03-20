@@ -25,7 +25,6 @@ public class TestUnit_Control : MonoBehaviour
     {
         //this.sm.ExecuteStateUpdate();
         //Debug.Log(pathIndex);
-
         if (this.gameObject.GetComponent<Minion>().GetTarget())
             return;
 
@@ -37,11 +36,15 @@ public class TestUnit_Control : MonoBehaviour
             return;
         }
 
+        if(waypointIndex <= 0)
         pathIndex = tempPathManager.GetComponent<PathManager>().AssignPath(transform.position, this.tag);
+
         if (pathIndex <= -1)//If there is no path, dont continue
         {
             return;
         }
+
+        //GetComponent<NavMeshAgent>().baseOffset = 0f;
 
         agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
 

@@ -1,52 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Scientist : Healer_Unit
 {
-    public GameObject[] healTargetList;
-    // Start is called before the first frame update
-    void Start()
+    public GameObject rangeProjectile;
+
+    public override void Healing()
     {
+        if (target == null)
+            return;
 
-        healthValue = 100;
-        startHealthvalue = healthValue;
-        attackValue = 30;
-
-        isActive = true;
-    }
-
-    public override void Healing(float HealValue)
-    {
-        if (healthValue < startHealthvalue)
+        //Debug.Log("Who is attacking? : " + this.name);
+        if (CountDownTimer <= 0)
         {
-            if ((HealValue + healthValue) > startHealthvalue)
-            {
-                healthValue = startHealthvalue;
-                return;
-            }
-            healthValue += HealValue;
+            CountDownTimer = OriginalTimer;
+            Shoot();
+            //target.GetComponent<Minion>().TakeDamage(attackValue);
+        }
+        else
+        {
+            CountDownTimer -= Time.deltaTime;
         }
     }
 
-    public override void FindAllyToHeal()
+    public override void Unit_Self_Update()
     {
-        //base.FindAllyToHeal();
-        healTargetList = GameObject.FindGameObjectsWithTag("Ally_Unit");
-
-        foreach (GameObject GO in healTargetList)
+        if (minionWithinRange.Count > 0)
         {
-            //how to search through the list and find the unit with the lowest hp?
-            if (healthValue < 30)//only find units with health value less than 20?
-            {
-                Healing(60f);
-            }
+            this.stateMachine.ChangeState(new HealState(this, minionWithinRange, Ally_Tag));
         }
+
+       GetComponent<NavMeshAgent>().baseOffset = 5;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Shoot()
     {
-        //FindAllyToHeal();
+        GameObject bulletGO = (GameObject)Instantiate(rangeProjectile, this.transform.position, this.transform.rotation);
+        HealingProjectile bullet = bulletGO.GetComponent<HealingProjectile>();
+
+        if (bullet != null)
+        {
+            bullet.Seek(target.transform);
+            bullet.SetBase(this);
+        }
     }
 }

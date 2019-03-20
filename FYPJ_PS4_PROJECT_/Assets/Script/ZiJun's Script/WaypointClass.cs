@@ -13,6 +13,16 @@ public class WaypointClass : MonoBehaviour
     {
         //AddWaypoint();
         //Destroy(this.GetComponent<MeshFilter>());
+
+        Ray CastToGround = new Ray(transform.position, Vector3.down);
+        RaycastHit hit;
+        if (Physics.Raycast(CastToGround, out hit))
+        {
+            this.position = transform.position;
+            this.RayCastPosition = hit.point;
+
+            //Debug.Log(position);
+        }
     }
 
     void Update()
@@ -24,7 +34,7 @@ public class WaypointClass : MonoBehaviour
             this.position = transform.position;
             this.RayCastPosition = hit.point;
 
-            Debug.Log(position);
+            //Debug.Log(position);
         }
     }
 

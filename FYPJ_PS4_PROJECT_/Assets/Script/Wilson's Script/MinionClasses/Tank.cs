@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class Tank : Attack_Unit
 {
-    public GameObject bulletPrefab;
+    public GameObject meleeProjectile;
+
     public override void Attack()
     {
         //target = FindNearestUnit(transform.position);
@@ -37,7 +38,7 @@ public class Tank : Attack_Unit
 
     void Shoot()
     {
-        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
+        GameObject bulletGO = (GameObject)Instantiate(meleeProjectile, this.transform.position, this.transform.rotation);
         MeleeProjectile bullet = bulletGO.GetComponent<MeleeProjectile>();
 
         if (bullet != null)

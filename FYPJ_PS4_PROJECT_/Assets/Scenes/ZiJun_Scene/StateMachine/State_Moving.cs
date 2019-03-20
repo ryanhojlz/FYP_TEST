@@ -36,7 +36,7 @@ public class State_Moving : IState
 
     public void Execute()
     {
-        index = 10;
+        //index = 10;
         //Debug.Log("Excuting");
         //agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
     }
