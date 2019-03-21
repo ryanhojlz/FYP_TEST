@@ -39,8 +39,11 @@ public class HealState : IState
                 {
                     if (targetList[i].GetComponent<Minion>().MinionType == unit.targetableType[j])
                     {
-                        targetable = true;
-                        break;//Once found, no point carry on the loop
+                        if (targetList[i].GetComponent<TestUnit_Control>().GetpathIndex() == unit.GetComponent<TestUnit_Control>().GetpathIndex())
+                        {
+                            targetable = true;
+                            break;//Once found, no point carry on the loop
+                        }
                     }
                    
                 }
@@ -98,8 +101,11 @@ public class HealState : IState
 
         if (!unit.CheckWithinRange(unit.GetTarget().transform))//If not within attack range
         {
-            agent.isStopped = false;
-            agent.SetDestination(unit.GetTarget().gameObject.transform.position);
+            if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(unit.GetTarget().gameObject.transform.position);
+            }
 
             //if (unit.tag == "Ally_Unit" && unit.GetTarget())
             //    Debug.Log(unit.tag + " : " + unit.GetTarget().name);
@@ -109,7 +115,10 @@ public class HealState : IState
         }
         else
         {
-            agent.isStopped = true;
+            if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+            {
+                agent.isStopped = true;
+            }
             if (unit.GetTarget() != null)
             {
                 unit.Healing();

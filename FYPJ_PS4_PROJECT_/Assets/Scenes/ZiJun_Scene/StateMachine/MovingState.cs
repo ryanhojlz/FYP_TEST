@@ -18,7 +18,7 @@ public class MovingState : IState
     public void Enter()
     {
         //Debug.Log(agent.tag);
-        if(agent.isActiveAndEnabled)
+        if(agent.isActiveAndEnabled && agent.isOnNavMesh)
           this.agent.isStopped = false;
     }
 
@@ -43,7 +43,7 @@ public class MovingState : IState
 
     public void Exit()
     {
-        if (agent.isActiveAndEnabled)
+        if (agent.isActiveAndEnabled && agent.isOnNavMesh)
             this.agent.isStopped = true;
     }
 }

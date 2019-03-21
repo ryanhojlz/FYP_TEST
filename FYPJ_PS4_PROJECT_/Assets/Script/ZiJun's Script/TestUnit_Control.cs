@@ -12,7 +12,6 @@ public class TestUnit_Control : MonoBehaviour
     private int waypointIndex = 0;
 
     //private StateMachine sm = new StateMachine();
-
     private GameObject tempPathManager;
     private void Start()
     {
@@ -23,6 +22,12 @@ public class TestUnit_Control : MonoBehaviour
         this.GetComponent<Rigidbody>().freezeRotation = true;
         this.GetComponent<Rigidbody>().isKinematic = false;
     }
+
+    public int GetpathIndex()
+    {
+        return pathIndex;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -50,12 +55,13 @@ public class TestUnit_Control : MonoBehaviour
 
         //GetComponent<NavMeshAgent>().baseOffset = 0f;
 
+        if (agent.isOnNavMesh && agent.isActiveAndEnabled)
         agent.SetDestination(tempPathManager.GetComponent<PathManager>().GetNextWaypoint(pathIndex, waypointIndex));
 
         if (waypointIndex < tempPathManager.GetComponent<PathManager>().GetPathWaypointCount(pathIndex) - 1)
         {
             //If waypoint has reached, goes to the next path
-            if (!agent.pathPending)
+            if (!agent.pathPending && agent.isOnNavMesh && agent.isActiveAndEnabled)
             {
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {

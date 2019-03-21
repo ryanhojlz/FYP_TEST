@@ -127,7 +127,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 5
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -146,7 +146,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 86.86
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5036529923886850249
 Rigidbody:
@@ -160,7 +160,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -176,8 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb5dcd1a5def214c8ef657587e80e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinionType: 2
-  targetableType: 0100000000000000
+  OBJ_TYPE: 0
   startHealthvalue: 0
   healthValue: 5
   attackValue: 1
@@ -192,6 +191,8 @@ MonoBehaviour:
   TriggerRange: {fileID: 467190000}
   Enemy_Tag: 
   Ally_Tag: 
+  MinionType: 2
+  targetableType: 0100000000000000
   rangeProjectile: {fileID: 3134283589139726358, guid: 86074c057166cf246adab80064a32f9e,
     type: 3}
 --- !u!1 &1765271960459195091
