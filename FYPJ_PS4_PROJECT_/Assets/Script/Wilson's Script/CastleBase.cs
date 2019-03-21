@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleBase : MonoBehaviour
+public class CastleBase : Building
 {
-    public float CastleBaseHealthValue;
-    public float CastleBaseDefenceValue;
-    private EndGameState temp; 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private EndGameState temp;
 
     // Update is called once per frame
-    void Update()
+    public override void Unit_Self_Update()
     {
-        if (CastleBaseHealthValue <= 0)
+        if (healthValue <= 0)
         {
+            Die();
             //end game here
             temp = new EndGameState();
             temp.EndGame();
@@ -27,11 +20,11 @@ public class CastleBase : MonoBehaviour
 
     public float GetHealth()
     {
-        return CastleBaseHealthValue;
+        return healthValue;
     }
 
     public void SetHealth(float _castleBaseHealth)
     {
-        CastleBaseHealthValue = _castleBaseHealth;
+        healthValue = _castleBaseHealth;
     }
 }
