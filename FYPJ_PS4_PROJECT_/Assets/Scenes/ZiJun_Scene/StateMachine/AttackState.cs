@@ -42,24 +42,28 @@ public class AttackState : IState
                 if (targetList[i].tag != Enemy_Tag)//If is not enemy skip as well
                     continue;
 
-                if (!unit.CheckMinionWithinRange(targetList[i].GetComponent<Minion>()))//If not within attack range, skip
+                if (!unit.CheckWithinRange(targetList[i].transform))//If not within attack range, skip
                     continue;
 
-                bool targetable = false;
-                for (int j = 0; j < unit.targetableType.Count; ++j)
+                if (targetList[i].GetComponent<BasicGameOBJ>().OBJ_TYPE == BasicGameOBJ.OBJType.MINION)
                 {
-                    if (targetList[i].GetComponent<Minion>().MinionType == unit.targetableType[j])
+                    bool targetable = false;
+
+                    for (int j = 0; j < unit.targetableType.Count; ++j)
                     {
-                        targetable = true;
-                        break;//Once found, no point carry on the loop
+                        if (targetList[i].GetComponent<Minion>().MinionType == unit.targetableType[j])
+                        {
+                            targetable = true;
+                            break;//Once found, no point carry on the loop
+                        }
+
                     }
-                   
+
+                    if (!targetable)
+                        continue;
                 }
 
-                if (!targetable)
-                    continue;
-
-                tempDst = unit.CheckDist(targetList[i].GetComponent<Minion>());
+                tempDst = unit.CheckDist(targetList[i].transform);
 
                 if (tempDst >= distNearest)//If is longer then what is already targeted
                     continue;
@@ -82,7 +86,7 @@ public class AttackState : IState
 
         NavMeshAgent agent = unit.gameObject.GetComponent<NavMeshAgent>();
 
-        if (!unit.CheckMinionWithinRange(unit.GetTarget().GetComponent<Minion>()))//If not within attack range
+        if (!unit.CheckWithinRange(unit.GetTarget().transform))//If not within attack range
         {
             agent.isStopped = false;
             agent.SetDestination(unit.GetTarget().gameObject.transform.position);

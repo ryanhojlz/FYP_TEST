@@ -96,7 +96,7 @@ public class HealState : IState
         //}
 
 
-        if (!unit.CheckMinionWithinRange(unit.GetTarget().GetComponent<Minion>()))//If not within attack range
+        if (!unit.CheckWithinRange(unit.GetTarget().transform))//If not within attack range
         {
             agent.isStopped = false;
             agent.SetDestination(unit.GetTarget().gameObject.transform.position);

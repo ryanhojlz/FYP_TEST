@@ -10,7 +10,6 @@ public class MovingState : IState
     public MovingState(NavMeshAgent _agent, float _movespeed)
     {
         //Debug.Log(_movespeed);
-        
         this.agent = _agent;
         this.movespeed = _movespeed;
         this.agent.speed = movespeed;

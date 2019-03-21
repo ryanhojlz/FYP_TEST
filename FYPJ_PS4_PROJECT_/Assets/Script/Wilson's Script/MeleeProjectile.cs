@@ -98,12 +98,12 @@ public class MeleeProjectile : MonoBehaviour
 
     void Damage(Transform _unit)
     {
-        Minion unit = _unit.GetComponent<Minion>();
+        var unit = _unit.GetComponent<BasicGameOBJ>();
 
         if (unit != null)
         {
-            unit.TakeDamage(UnitThatShoots.GetComponent<Minion>().attackValue);
-            DisplayText(UnitThatShoots.GetComponent<Minion>().attackValue);
+            unit.TakeDamage(UnitThatShoots.GetComponent<BasicGameOBJ>().attackValue);
+            DisplayText(UnitThatShoots.GetComponent<BasicGameOBJ>().attackValue);
         }
     }
 }
