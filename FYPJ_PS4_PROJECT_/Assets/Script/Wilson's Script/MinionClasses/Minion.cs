@@ -39,12 +39,12 @@ public class Minion : BasicGameOBJ
             ChangeToMoveState();
         }
 
-        if (healthValue <= 0)
-        {
-            target = null;
+        //if (healthValue <= 0)
+        //{
+        //    target = null;
            
-            this.stateMachine.ChangeState(new DeadState(this.GetComponent<NavMeshAgent>(), this));//state machine
-        }
+        //    this.stateMachine.ChangeState(new DeadState(this));//state machine
+        //}
     }
 
     public virtual void Unit_Self_Update()

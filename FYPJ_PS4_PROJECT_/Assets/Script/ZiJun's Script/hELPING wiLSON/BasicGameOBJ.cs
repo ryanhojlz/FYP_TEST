@@ -83,6 +83,13 @@ public class BasicGameOBJ : MonoBehaviour
         UpdateCheckList();//Checking for unit in the list. If it is not active, remove it
         CheckTargetActive();//Check if your target is active. If not active target becomes null
 
+        if (healthValue <= 0)
+        {
+            target = null;
+
+            this.stateMachine.ChangeState(new DeadState(this));//state machine
+        }
+
     }
     //Taking Damage
     public void TakeDamage(float dmgAmount)

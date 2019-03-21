@@ -5,14 +5,12 @@ using UnityEngine.AI;
 
 public class DeadState : IState
 {
-    Minion unit;
-    NavMeshAgent agent;
+    BasicGameOBJ unit;
 
     //need to pass values for the dead state?
-    public DeadState(NavMeshAgent _agent, Minion _unit)
+    public DeadState(BasicGameOBJ _unit)
     {
         unit = _unit;
-        agent = _agent;
     }
 
     public void Enter()
