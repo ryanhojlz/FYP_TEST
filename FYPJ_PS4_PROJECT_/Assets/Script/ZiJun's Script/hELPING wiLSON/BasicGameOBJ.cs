@@ -283,4 +283,9 @@ public class BasicGameOBJ : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, rangeValue);
     }
+
+    public void SetState(IState state)
+    {
+        this.stateMachine.ChangeState(state);
+    }
 }
