@@ -36,6 +36,8 @@ public class BasicGameOBJ : MonoBehaviour
 
     protected StateMachine stateMachine = new StateMachine();
 
+    public GameObject ParticleExplosion;
+
     public string Enemy_Tag;
     public string Ally_Tag;
     // Start is called before the first frame update
@@ -108,7 +110,13 @@ public class BasicGameOBJ : MonoBehaviour
         //Can add timer and other stuff
         if (isActive == false)
         {
+            //GameObject newText = Instantiate(prefabtext) as GameObject;
+            ////newText.transform.parent = this.transform;
+            //newText.transform.position = this.transform.position;
+
             //Debug.Log("Destroying");
+            GameObject thisnew = Instantiate(ParticleExplosion) as GameObject;
+            thisnew.transform.position = this.transform.position;
             Destroy(gameObject);
         }
     }

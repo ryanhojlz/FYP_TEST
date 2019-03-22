@@ -258,6 +258,8 @@ MonoBehaviour:
   healthBar: {fileID: 1400482511}
   minionWithinRange: []
   TriggerRange: {fileID: 1466075887788623119}
+  ParticleExplosion: {fileID: 1119411150356851553, guid: ee34adc26603e26488b4557201ee1481,
+    type: 3}
   Enemy_Tag: 
   Ally_Tag: 
   MinionType: 0

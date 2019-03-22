@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AbsorbParticle : MonoBehaviour
 {
-    public List<Transform>targetPosition;
+    public GameObject[] targetPosition;
 
     ParticleSystem m_System;
     ParticleSystem.Particle[] m_Particles;
@@ -15,10 +15,12 @@ public class AbsorbParticle : MonoBehaviour
     {
         InitializeIfNeeded();
 
+        targetPosition = GameObject.FindGameObjectsWithTag("Soul_Absorber");
+
         // GetParticles is allocation free because we reuse the m_Particles buffer between updates
         int numParticlesAlive = m_System.GetParticles(m_Particles);
 
-        if (targetPosition.Count > 0)
+        if (targetPosition.Length > 0)
         {
             // Change only the particles that are alive
             for (int i = 0; i < numParticlesAlive; i++)
@@ -27,23 +29,43 @@ public class AbsorbParticle : MonoBehaviour
                 Vector3 PosToOffSet = PosZero - m_Particles[i].position;
 
                 float nearest = float.MaxValue;
-                int nearestIndex = 0;
+                Transform TargetedPosition = null;
 
-                for (int j = 0; j < targetPosition.Count; ++j)
+                //for (int j = 0; j < targetPosition.Length; j++)
+                //{
+                //    float distance = (m_Particles[i].position - (targetPosition[j].position - this.transform.position)).magnitude;
+
+                //    if (distance < nearest)
+                //    {
+                //        nearestIndex = j;
+                //        nearest = distance;
+                //    }
+                //}
+
+                
+
+                foreach (GameObject TargetPosition in targetPosition)
                 {
-                    float distance = (m_Particles[i].position - (targetPosition[j].position - this.transform.position)).magnitude;
+                    float distance = (m_Particles[i].position - (TargetPosition.transform.position - this.transform.position)).magnitude;
 
                     if (distance < nearest)
                     {
-                        nearestIndex = j;
                         nearest = distance;
+                        TargetedPosition = TargetPosition.transform;
                     }
                 }
 
-                Vector3 Direction = (m_Particles[i].position - (targetPosition[nearestIndex].position - this.transform.position)).normalized;
+                Vector3 Direction = (m_Particles[i].position - (TargetedPosition.position - this.transform.position)).normalized;
 
                 if (m_Particles[i].remainingLifetime / m_Particles[i].startLifetime < 0.5)
                     m_Particles[i].position = new Vector3(m_Particles[i].position.x - Direction.x, m_Particles[i].position.y - Direction.y, m_Particles[i].position.z - Direction.z);
+
+
+
+                //Vector3 Direction = (m_Particles[i].position - (targetPosition[nearestIndex].position - this.transform.position)).normalized;
+
+                //if (m_Particles[i].remainingLifetime / m_Particles[i].startLifetime < 0.5)
+                //    m_Particles[i].position = new Vector3(m_Particles[i].position.x - Direction.x, m_Particles[i].position.y - Direction.y, m_Particles[i].position.z - Direction.z);
             }
 
         }
