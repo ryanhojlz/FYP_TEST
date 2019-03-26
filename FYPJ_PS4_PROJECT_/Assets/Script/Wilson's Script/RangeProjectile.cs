@@ -94,6 +94,7 @@ public class RangeProjectile : MonoBehaviour
             //newText.transform.parent = this.transform;
             newText.transform.position = this.transform.position;
             newText.GetComponent<TextMesh>().text = "" + DamageAmount;
+            newText.GetComponent<TextMesh>().color = Color.red;
         }
     }
 

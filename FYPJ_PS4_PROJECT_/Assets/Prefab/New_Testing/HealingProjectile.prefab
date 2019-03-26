@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5666043916022919459}
   - component: {fileID: 6501383582514671263}
   m_Layer: 0
-  m_Name: RangeProjectile
+  m_Name: HealingProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

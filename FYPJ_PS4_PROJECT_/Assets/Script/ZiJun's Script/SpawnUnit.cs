@@ -5,6 +5,14 @@ using UnityEngine;
 public class SpawnUnit : MonoBehaviour
 {
     public GameObject UnitToSpawn;
+    public enum SPAWNTYPE
+    {
+        MELEE,
+        RANGE,
+        HEAL
+    }
+
+    public SPAWNTYPE Unit_Type;
     bool hasSpawn = false;
 
     //static bool unitspawned = false;

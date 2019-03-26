@@ -75,7 +75,7 @@ public class BasicGameOBJ : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("This Update");
+        //Debug.Log("This Update");
         UpdateHealth();
 
         stateMachine.ExecuteStateUpdate();
@@ -117,7 +117,8 @@ public class BasicGameOBJ : MonoBehaviour
             //Debug.Log("Destroying");
             GameObject thisnew = Instantiate(ParticleExplosion) as GameObject;
             thisnew.transform.position = this.transform.position;
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

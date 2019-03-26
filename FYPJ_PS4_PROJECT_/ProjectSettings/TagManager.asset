@@ -13,6 +13,7 @@ TagManager:
   - PathManager
   - Ally_Path
   - Enemy_Path
+  - Soul_Absorber
   layers:
   - Default
   - TransparentFX

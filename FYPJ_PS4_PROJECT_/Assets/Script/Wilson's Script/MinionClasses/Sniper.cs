@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sniper : Attack_Unit
 {
     public GameObject bulletPrefab;
-    public AudioSource attackSound;
+    //public AudioSource attackSound;
 
     public override void Attack()
     {
@@ -15,8 +15,10 @@ public class Sniper : Attack_Unit
             return;
 
         //Debug.Log("Who is attacking? : " + this.name);
+
         if (CountDownTimer <= 0)
         {
+           
             CountDownTimer = OriginalTimer;
             Shoot();
             //target.GetComponent<Minion>().TakeDamage(attackValue);
@@ -38,10 +40,14 @@ public class Sniper : Attack_Unit
     void Shoot()
     {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
-        Bullet bullet = bulletGO.GetComponent<Bullet>();
+        RangeProjectile bullet = bulletGO.GetComponent<RangeProjectile>();
         //attackSound.Play();
 
         if (bullet != null)
+        {
+            //Debug.Log(CountDownTimer);
             bullet.Seek(target.transform);
+            bullet.SetBase(this);
+        }
     }
 }

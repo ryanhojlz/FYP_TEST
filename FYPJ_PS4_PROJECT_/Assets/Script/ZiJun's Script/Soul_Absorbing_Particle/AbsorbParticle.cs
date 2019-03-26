@@ -10,6 +10,10 @@ public class AbsorbParticle : MonoBehaviour
     ParticleSystem.Particle[] m_Particles;
     public float m_Drift = 0.01f;
 
+    //private ParticleSystem PSystem;
+    private ParticleCollisionEvent[] CollisionEvents;
+
+
     // Update is called once per frame
     private void LateUpdate()
     {
@@ -17,8 +21,12 @@ public class AbsorbParticle : MonoBehaviour
 
         targetPosition = GameObject.FindGameObjectsWithTag("Soul_Absorber");
 
+       
+
         // GetParticles is allocation free because we reuse the m_Particles buffer between updates
         int numParticlesAlive = m_System.GetParticles(m_Particles);
+
+        ///Debug.Log("Number of Particles alife = " + numParticlesAlive);
 
         if (targetPosition.Length > 0)
         {
@@ -42,7 +50,7 @@ public class AbsorbParticle : MonoBehaviour
                 //    }
                 //}
 
-                
+
 
                 foreach (GameObject TargetPosition in targetPosition)
                 {
@@ -60,19 +68,44 @@ public class AbsorbParticle : MonoBehaviour
                 if (m_Particles[i].remainingLifetime / m_Particles[i].startLifetime < 0.5)
                     m_Particles[i].position = new Vector3(m_Particles[i].position.x - Direction.x, m_Particles[i].position.y - Direction.y, m_Particles[i].position.z - Direction.z);
 
-
-
-                //Vector3 Direction = (m_Particles[i].position - (targetPosition[nearestIndex].position - this.transform.position)).normalized;
-
-                //if (m_Particles[i].remainingLifetime / m_Particles[i].startLifetime < 0.5)
-                //    m_Particles[i].position = new Vector3(m_Particles[i].position.x - Direction.x, m_Particles[i].position.y - Direction.y, m_Particles[i].position.z - Direction.z);
             }
 
         }
-       
+
+        if (numParticlesAlive <= 0)
+        {
+            Destroy(this.gameObject);//.SetActive(false);
+        }
+
         // Apply the particle changes to the Particle System
         m_System.SetParticles(m_Particles, numParticlesAlive);
     }
+
+    //public void OnParticleCollision(GameObject other)
+    //{
+    //    CollisionEvents = new ParticleCollisionEvent[100];
+
+    //    int collCount = m_System.GetSafeCollisionEventSize();
+
+    //    if (collCount > CollisionEvents.Length)
+    //        CollisionEvents = new ParticleCollisionEvent[collCount];
+
+    //    //int eventCount = m_System.GetCollisionEvents(other, CollisionEvents);
+    //    int eventCount = CollisionEvents.Length;
+
+    //    Debug.Log("Removing Particles");
+
+    //    for (int i = 0; i < eventCount; i++)
+    //    {
+    //        //TODO: Do your collision stuff here. 
+    //        // You can access the CollisionEvent[i] to obtaion point of intersection, normals that kind of thing
+    //        // You can simply use "other" GameObject to access it's rigidbody to apply force, or check if it implements a class that takes damage or whatever
+
+    //        //other.SetActive(false);
+    //        Debug.Log("Removing Particles");
+    //        //Destroy(other.gameObject);
+    //    }
+    //}
 
     void InitializeIfNeeded()
     {

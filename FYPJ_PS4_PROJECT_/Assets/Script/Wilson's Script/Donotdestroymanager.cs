@@ -16,7 +16,7 @@ public class Donotdestroymanager : MonoBehaviour
     //{
 
     //}
-    int number = 1;
+    //int number = 1;
     public void Mainmenu()
     {
         

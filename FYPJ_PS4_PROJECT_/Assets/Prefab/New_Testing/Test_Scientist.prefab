@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb5dcd1a5def214c8ef657587e80e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OBJ_TYPE: 0
+  OBJ_TYPE: 1
   startHealthvalue: 0
   healthValue: 5
   attackValue: 1
@@ -189,6 +189,8 @@ MonoBehaviour:
   healthBar: {fileID: 1528807739}
   minionWithinRange: []
   TriggerRange: {fileID: 467190000}
+  ParticleExplosion: {fileID: 1119411150356851553, guid: ee34adc26603e26488b4557201ee1481,
+    type: 3}
   Enemy_Tag: 
   Ally_Tag: 
   MinionType: 2
