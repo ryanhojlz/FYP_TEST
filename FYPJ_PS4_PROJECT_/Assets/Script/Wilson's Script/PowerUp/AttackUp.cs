@@ -18,6 +18,10 @@ public class AttackUp : PowerUp
 
     public override void OnTriggerEnter(Collider other)
     {
-        minion_unit.attackValue += 50f;
+        if (other.GetComponent<Minion>())
+        {
+            other.GetComponent<Minion>().attackValue += 50f;
+            Destroy(gameObject);
+        }
     }
 }

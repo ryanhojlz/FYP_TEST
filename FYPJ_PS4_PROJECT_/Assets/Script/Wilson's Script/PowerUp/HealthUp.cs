@@ -7,17 +7,22 @@ public class HealthUp : PowerUp
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public override void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
-        minion_unit.startHealthvalue += 50f;
+        if (other.GetComponent<Minion>())
+        {
+            //Debug.Log("Collided");
+            other.GetComponent<Minion>().startHealthvalue += 50f;
+            Destroy(gameObject);
+        }
     }
 }
